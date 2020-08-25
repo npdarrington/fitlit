@@ -10,12 +10,23 @@ class Hydration {
         },0)
         return totalOuncesDrank / singleUserData.length
     }
-    returnfluidOuncesForSpecificDay(userId,date){
+    returnFluidOuncesForSpecificDay(userId,date){
     let singleUserData = this.HydrationData.filter(user => { 
             return user.userID === userId
         })
-    return singleUserData.find(user => {  user.date === date})
+    return singleUserData.find(user => {
+        return user.date === date}).numOunces
 
 }
+returnUserWeeklyFluidConsumption(UserId,startDate){
+    let singleUserData = this.HydrationData.filter(user => { 
+        return user.userID === UserId
+    })
+
+    let startOfWeek = singleUserData.find(user => {user.date === startDate})
+
+    singleUserData.reduce()
+}
+
 }
 module.exports = Hydration
