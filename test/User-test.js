@@ -1,13 +1,11 @@
+const expect = require('chai').expect;
 const User = require('../src/User');
 const userData = require('./userTestData');
-const { expect } = require('chai');
 
 describe('User', () => {
-  let userId;
   let user = new User();
   beforeEach(() => {
-    userId = userData.find(user => user.id === 1);
-    user = new User(userId);
+    user = new User(1);
   });
 
   it('should be an instance of User', () => {
@@ -16,5 +14,9 @@ describe('User', () => {
 
   it('should hold a single user property from data file', () => {
     expect(user.userData).to.deep.equal(user);
+  });
+
+  it('should return a user\'s first name only', () => {
+    expect(user.getUserName()).to.equal('Luisa Hane');
   });
 });
