@@ -14,8 +14,8 @@ describe('Hydration',()=>{
         expect(hydration.returnFluidOuncesForSpecificDay(18,"2019/06/17")).to.equal(76)
 
     })
-    it('Should return many fluid ounces of water consumed each day over the course of a week',()=>{
-        expect(hydration.returnUserWeeklyFluidConsumption(UserID,StartingDay)).to.equal()
+    it('Should return fluid ounces of water consumed each day over the course of a week',()=>{
+        expect(hydration.returnUserWeeklyFluidConsumption(12,"2019/06/16")).to.deep.equal([56,88,29,46,31,20,76])
         
     })
 })

@@ -18,15 +18,20 @@ class Hydration {
         return user.date === date}).numOunces
 
 }
+
 returnUserWeeklyFluidConsumption(UserId,startDate){
     let singleUserData = this.HydrationData.filter(user => { 
         return user.userID === UserId
     })
+   var startDateObject =  singleUserData.find(user => user.date === startDate )
+   let indexOfstartDateObject = singleUserData.indexOf(startDateObject)
+   var UsernumOunces = singleUserData.map(user =>{
+        return user.numOunces
+   })
 
-    let startOfWeek = singleUserData.find(user => {user.date === startDate})
+   return UsernumOunces.splice(indexOfstartDateObject,7)
 
-    singleUserData.reduce()
+}
 }
 
-}
 module.exports = Hydration
