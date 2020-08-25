@@ -1,4 +1,5 @@
 let currentUser;
+let userTitle = document.querySelector('.user-title');
 let userName = document.querySelector('.name');
 let userAddress = document.querySelector('.address');
 let userEmail = document.querySelector('.email');
@@ -11,6 +12,7 @@ const getCurrentUser = userData => {
 }
 
 const populateUserData = currentUser => {
+  userTitle.innerText = currentUser.getUserName();
   userName.innerText = currentUser.userData.name;
   userAddress.innerText = currentUser.userData.address;
   userEmail.innerText = currentUser.userData.email;
