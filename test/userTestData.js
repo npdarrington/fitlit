@@ -68,4 +68,5 @@ const userData = [
         33,
         10
       ]
-    }],
+    }]
+    module.exports = userData
