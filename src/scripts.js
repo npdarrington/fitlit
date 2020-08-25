@@ -6,16 +6,16 @@ let userFriends = document.querySelector('.friends');
 let userStrideLength = document.querySelector('.stride-length');
 
 const getCurrentUser = userData => {
-  currentUser = userData.find(user => user.id === 1);
+  const allUsers = new UserRepo(userData);
+  currentUser = new User(allUsers.returnUserData(1));
 }
 
 const populateUserData = currentUser => {
-  console.log(currentUser);
-  userName.innerText = currentUser.name;
-  userAddress.innerText = currentUser.address;
-  userEmail.innerText = currentUser.email;
-  userFriends.innerText = currentUser.friends;
-  userStrideLength.innerText = currentUser.strideLength;
+  userName.innerText = currentUser.userData.name;
+  userAddress.innerText = currentUser.userData.address;
+  userEmail.innerText = currentUser.userData.email;
+  userFriends.innerText = currentUser.userData.friends;
+  userStrideLength.innerText = currentUser.userData.strideLength;
 }
 
 window.onload = () => {
