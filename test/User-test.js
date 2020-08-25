@@ -3,9 +3,11 @@ const User = require('../src/User');
 const userData = require('./userTestData');
 
 describe('User', () => {
-  let user = new User();
+  let selectedUser;
+  let user;
   beforeEach(() => {
-    user = new User(1);
+    selectedUser = userData.find(user => user.id === 1);
+    user = new User(selectedUser);
   });
 
   it('should be an instance of User', () => {
