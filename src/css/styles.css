@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 :root {
   --body-bg-color: #323a45;
 }
@@ -6,9 +11,8 @@ body {
   background-color: var(--body-bg-color);
 }
 
-#main .app-title {
+#container {
   width: 70%;
   margin: 0 auto;
   padding: 10px;
-  color: #fff;
 }
