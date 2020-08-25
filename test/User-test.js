@@ -15,7 +15,7 @@ describe('User', () => {
   });
 
   it('should hold a single user property from data file', () => {
-    expect(user.userData).to.deep.equal(user);
+    expect(user.userData).to.equal(selectedUser);
   });
 
   it('should return a user\'s first name only', () => {
