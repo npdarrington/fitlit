@@ -1,15 +1,15 @@
 const chai = require('chai')
 const expect = chai.expect
-const UserRepo = require('src/userRepo.js')
-const testData = require('test/userTestData.js')
-const userRepo;
+const UserRepo = require('../src/userRepo.js')
+const testData = require('./userTestData.js')
+let userRepo;
 beforeEach(function(){
     userRepo = new UserRepo(testData)
 })
 describe('UserRepo',function(){
    
     it('Given a user’s ID, should return correct user data',function(){
-        userRepo.returnUserData(1).deep.equal(
+       expect (userRepo.returnUserData(1)).to.deep.equal(
             {
                 "id": 1,
                 "name": "Luisa Hane",
@@ -27,6 +27,6 @@ describe('UserRepo',function(){
 
     })
     it('should be able to return the average step goal amongst all users',function(){
-        userRepo.returnAverageStepCount().deep.equal(6400)
-    }
-}
+        expect(userRepo.returnAverageStepCount()).to.deep.equal(6400)
+    })
+})
