@@ -5,3 +5,10 @@
 body {
   background-color: var(--body-bg-color);
 }
+
+#main .app-title {
+  width: 70%;
+  margin: 0 auto;
+  padding: 10px;
+  color: #fff;
+}
