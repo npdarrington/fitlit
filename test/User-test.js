@@ -19,6 +19,6 @@ describe('User', () => {
   });
 
   it('should return a user\'s first name only', () => {
-    expect(user.getUserName()).to.equal('Luisa Hane');
+    expect(user.getUserName()).to.equal('Luisa');
   });
 });
