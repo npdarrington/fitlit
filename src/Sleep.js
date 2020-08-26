@@ -58,6 +58,18 @@ class Sleep {
     });
     return getUserSevenDaySleepData.splice(indexOfStartDateObject, 7).reverse();
   }
+
+  getUserSleepQualityPerDayForWeek(userId, startDate) {
+    let singleUserData = this.sleepData.filter(user => {
+      return user.userID === userId;
+    });
+    let startDateObject = singleUserData.find(user => user.date === startDate);
+    let indexOfStartDateObject = singleUserData.indexOf(startDateObject);
+    let getUserSevenDaySleepQuality = singleUserData.map(user => {
+      return { date: user.date, sleepQuality: user.sleepQuality }
+    });
+    return getUserSevenDaySleepQuality.splice(indexOfStartDateObject, 7).reverse();
+  }
 }
 
 if (typeof module !== 'undefined') {
