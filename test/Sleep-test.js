@@ -10,6 +10,6 @@ describe('Sleep', () => {
   });
 
   it('Should get a user\'s verage number of hours slept per day', () => {
-    expect(sleep.getUserAverageSleptHoursPerDay(1)).to.equal(7.35)
+    expect(sleep.getUserAverageSleptHoursPerDay(1)).to.equal(7.34)
   });
 });
