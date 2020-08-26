@@ -3749,5 +3749,6 @@ const hydrationTestData = [
       "date": "2019/06/29",
       "numOunces": 36
     }]
-
-    module.exports = hydrationTestData
+    if (typeof module !== 'undefined') {
+      module.exports = hydrationTestData
+    }
