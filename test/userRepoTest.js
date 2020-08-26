@@ -27,6 +27,6 @@ describe('UserRepo',function(){
 
     })
     it('should be able to return the average step goal amongst all users',function(){
-        expect(userRepo.returnAverageStepCount()).to.deep.equal(6400)
+        expect(userRepo.returnAverageStepGoalAllUsers()).to.deep.equal(6400)
     })
 })

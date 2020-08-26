@@ -3,10 +3,49 @@
   <head>
     <meta charset="UTF-8">
     <title>Activity Tracker</title>
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
   <body>
-    <h1>Activity Tracker</h1>
+    <section id="container">
+      <header id="header">
+        <section class="header-left">
+          <article class="date-selector">
+            <!-- Input date selector here -->
+            Date text here
+          </article>
+          <p class="last-sync-text">Last sync: 12 min ago</p>
+        </section>
+        <section class="header-right">
+          <h1 class="user-title"></h1>
+          <div class="hamburger-menu"></div>
+        </section>
+      </header>
+      <main id="main">
+        <section class="activity-card step-activity">
+          <article class="user-step-goal">
+            <h2 class="user-step-title">My Step Goal</h2>
+            <h4 class="user-step-count"></h4>
+          </article>
+          <article class="all-users-step-goal">
+            <h2 class="all-users-step-title">All Users Step Goal</h2>
+            <h4 class="all-users-step-count"></h4>
+          </article>
+        </section>
+        <section class="activity-card info-card">
+          <p class="name"></p>
+          <p class="address"></p>
+          <p class="email"></p>
+          <p class="friends"></p>
+          <p class="stride-length"></p>
+        </section>
+      </main>
+      <footer id="footer">
+        
+      </footer>
+    </section>
 
+    <script src="./userRepo.js"></script>
+    <script src="./User.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/hydration.js"></script>
     <script type="text/javascript" src="../data/sleep.js"></script>
