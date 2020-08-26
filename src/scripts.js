@@ -26,10 +26,15 @@ const getUserStepGoal = currentUser => {
   userStepGoal.innerText = currentUser.userData.dailyStepGoal;
 }
 
+const getAllUsersStepGoal = () => {
+  allUsersStepGoal.innerText = allUsers.returnAverageStepGoalAllUsers();
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
   getUserStepGoal(currentUser);
+  getAllUsersStepGoal();
 };
 
 
