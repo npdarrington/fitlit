@@ -36,6 +36,28 @@ class Sleep {
     });
     return getDataForSpecificDate.hoursSlept;
   }
+
+  getSleepQualityForSpecificDay(userId, date) {
+    let singleUserData = this.sleepData.filter(user => {
+      return user.userID === userId;
+    });
+    let getDataForSpecificDate = singleUserData.find(user => {
+      return user.date === date;
+    });
+    return getDataForSpecificDate.sleepQuality;
+  }
+
+  getHoursSleptPerDayForWeek(userId, startDate) {
+    let singleUserData = this.sleepData.filter(user => {
+      return user.userID === userId;
+    });
+    let startDateObject = singleUserData.find(user => user.date === startDate);
+    let indexOfStartDateObject = singleUserData.indexOf(startDateObject);
+    let getUserSevenDaySleepData = singleUserData.map(user => {
+      return { date: user.date, hoursSlept: user.hoursSlept }
+    });
+    return getUserSevenDaySleepData.splice(indexOfStartDateObject, 7).reverse();
+  }
 }
 
 if (typeof module !== 'undefined') {
