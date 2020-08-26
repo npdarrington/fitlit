@@ -1,13 +1,15 @@
-let currentUser;
 let userTitle = document.querySelector('.user-title');
 let userName = document.querySelector('.name');
 let userAddress = document.querySelector('.address');
 let userEmail = document.querySelector('.email');
 let userFriends = document.querySelector('.friends');
 let userStrideLength = document.querySelector('.stride-length');
+let userStepGoal = document.querySelector('.user-step-count');
+let allUsersStepGoal = document.querySelector('.all-users-step-count');
+let currentUser;
+const allUsers = new UserRepo(userData);
 
 const getCurrentUser = userData => {
-  const allUsers = new UserRepo(userData);
   currentUser = new User(allUsers.returnUserData(1));
 }
 
@@ -19,6 +21,8 @@ const populateUserData = currentUser => {
   userFriends.innerText = currentUser.userData.friends;
   userStrideLength.innerText = currentUser.userData.strideLength;
 }
+
+
 
 window.onload = () => {
   getCurrentUser(userData);
