@@ -70,6 +70,13 @@ class Sleep {
     });
     return getUserSevenDaySleepQuality.splice(indexOfStartDateObject, 7).reverse();
   }
+
+  getAllUsersAverageSleepQuality() {
+    let totalSleepQualityOfUsers = this.sleepData.reduce((total, user) => {
+      return total += user.sleepQuality;
+    }, 0);
+    return Math.round((totalSleepQualityOfUsers / this.sleepData.length) * 10) / 10;
+  }
 }
 
 if (typeof module !== 'undefined') {
