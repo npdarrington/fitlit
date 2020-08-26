@@ -27,7 +27,8 @@ returnUserWeeklyFluidConsumption(UserId,startDate){
    let indexOfstartDateObject = singleUserData.indexOf(startDateObject)
    var UsernumOunces = singleUserData.map(user =>{
        var dataAndNumOfOuncesDrank = {}
-       dataAndNumOfOuncesDrank[`${user.date}`] =user.numOunces
+       dataAndNumOfOuncesDrank.date  = user.date 
+       dataAndNumOfOuncesDrank.numOunces =  user.numOunces
              return dataAndNumOfOuncesDrank
    })
 
