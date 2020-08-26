@@ -26,6 +26,16 @@ class Sleep {
     }, 0);
     return userSleepQualityAverage / singleUserData.length;
   }
+
+  getSleepHoursForSpecificDay(userId, date) {
+    let singleUserData = this.sleepData.filter(user => {
+      return user.userID === userId;
+    });
+    let getDataForSpecificDate = singleUserData.find(user => {
+      return user.date === date;
+    });
+    return getDataForSpecificDate.hoursSlept;
+  }
 }
 
 if (typeof module !== 'undefined') {
