@@ -15,27 +15,15 @@ describe('Hydration',()=>{
 
     })
     it('Should return fluid ounces of water consumed each day over the course of a week',()=>{
-        expect(hydration.returnUserWeeklyFluidConsumption(12,"2019/06/16")).to.deep.equal([{
-             "2019/06/16": 56
-             },
-            {
-              "2019/06/17": 88
-             },
-             {
-               "2019/06/18": 29
-             },
-             {
-               "2019/06/19": 46
-             },
-             {
-               "2019/06/20": 31
-             },
-             {
-               "2019/06/21": 20
-             },
-             {
-               "2019/06/22": 76
-             }])
-        
+        expect(hydration.returnUserWeeklyFluidConsumption(1,"2019/06/15")).to.deep.equal(
+          [
+        {date: "2019/06/21", numOunces: 50},
+        {date: "2019/06/20", numOunces: 50},
+        {date: "2019/06/19", numOunces: 91},
+        {date: "2019/06/18", numOunces: 61},
+        {date: "2019/06/17", numOunces: 96},
+        {date: "2019/06/16", numOunces: 69},
+        {date: "2019/06/15", numOunces: 37},
+        ])
     })
 })
