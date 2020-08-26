@@ -22,11 +22,14 @@ const populateUserData = currentUser => {
   userStrideLength.innerText = currentUser.userData.strideLength;
 }
 
-
+const getUserStepGoal = currentUser => {
+  userStepGoal.innerText = currentUser.userData.dailyStepGoal;
+}
 
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
+  getUserStepGoal(currentUser);
 };
 
 
