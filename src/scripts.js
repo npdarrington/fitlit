@@ -6,9 +6,11 @@ let userFriends = document.querySelector('.friends');
 let userStrideLength = document.querySelector('.stride-length');
 let userStepGoal = document.querySelector('.user-step-count');
 let allUsersStepGoal = document.querySelector('.all-users-step-count');
+let waterDrankToday = document.querySelector('.calculated-water-drank')
+let weeklyWaterIntake =  document.querySelector('.weekly-hydration')
 let currentUser;
 const allUsers = new UserRepo(userData);
-
+const hydration = new Hydration(hydrationData)
 const getCurrentUser = userData => {
   currentUser = new User(allUsers.returnUserData(1));
 }
@@ -30,11 +32,26 @@ const getAllUsersStepGoal = () => {
   allUsersStepGoal.innerText = allUsers.returnAverageStepGoalAllUsers();
 }
 
+const getUserWaterDrankToday = () => {
+  waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(1,'2019/06/15')
+}
+const getUserWaterDrankForTheWeek = () => {
+  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(1,'2019/06/15')
+
+UserHydration.forEach( (day) => {
+var WaterIntakeDiv = document.createElement(("div"))
+console.log(WaterIntakeDiv)
+WaterIntakeDiv.innerText = `${day.date} : ${day.numOunces} ounces`
+weeklyWaterIntake.appendChild(WaterIntakeDiv)
+})
+}
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
   getUserStepGoal(currentUser);
   getAllUsersStepGoal();
+  getUserWaterDrankToday()
+  getUserWaterDrankForTheWeek()
 };
 
 

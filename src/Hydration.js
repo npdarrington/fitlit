@@ -26,11 +26,12 @@ returnUserWeeklyFluidConsumption(UserId,startDate){
    var startDateObject =  singleUserData.find(user => user.date === startDate )
    let indexOfstartDateObject = singleUserData.indexOf(startDateObject)
    var UsernumOunces = singleUserData.map(user =>{
-        return user.numOunces
+       var dataAndNumOfOuncesDrank = {}
+       dataAndNumOfOuncesDrank.date  = user.date;
+       dataAndNumOfOuncesDrank.numOunces =  user.numOunces;
+             return dataAndNumOfOuncesDrank
    })
-
-   return UsernumOunces.splice(indexOfstartDateObject,7)
-
+   return UsernumOunces.splice(indexOfstartDateObject,7).reverse()
 }
 }
 
