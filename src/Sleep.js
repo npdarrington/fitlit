@@ -16,6 +16,16 @@ class Sleep {
     let finalNumber = +(`${getDecimalNumber[0]}.${turnDecimalIntoMinutes}`);
     return finalNumber;
   }
+
+  getUserAverageSleepQualityAllTime(userId) {
+    let singleUserData = this.sleepData.filter(user => {
+      return user.userID === userId;
+    });
+    let userSleepQualityAverage =  singleUserData.reduce((total, user) => {
+      return total += user.sleepQuality;
+    }, 0);
+    return userSleepQualityAverage / singleUserData.length;
+  }
 }
 
 if (typeof module !== 'undefined') {
