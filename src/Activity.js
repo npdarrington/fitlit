@@ -44,8 +44,7 @@ class Activity {
         let singleDay =  singleUserData.filter(user =>{
             return user.date === date
         })
-        console.log(singleDay[0].numSteps)
-        console.log(userStepGoal)
+       
         return singleDay[0].numSteps > userStepGoal
     }
     returnAlltimeStairClimbingRecord(userId){
@@ -55,11 +54,9 @@ class Activity {
           let allUserStairsClimbed = singleUserData.map(date =>{
               return date.flightsOfStairs
           })
-          console.log(allUserStairsClimbed)
           let allUserStairsClimbedSorted = allUserStairsClimbed.sort((a,b)=>{
               return b-a
           })
-          console.log(allUserStairsClimbedSorted)
           return allUserStairsClimbedSorted[0]
     }
     returnAverageNumberOfStairsClimbedForDay(date){
@@ -83,12 +80,13 @@ class Activity {
         let stepsInDay =  singleDay.map(user =>{
             return user.numSteps
         })
-        let totalStepsInDay = stairsClimbedInDay.reduce((acc,curr)=>{
+        let totalStepsInDay = stepsInDay.reduce((acc,curr)=>{
             return acc +=curr
         },0)
 
         let totalNumberOfUsers = this.findTotalNumberofUser()
 
+        console.log( Math.round(totalStepsInDay / totalNumberOfUsers))
         return Math.round(totalStepsInDay / totalNumberOfUsers)
     }
     findTotalNumberofUsers(){
