@@ -89,4 +89,12 @@ describe('Sleep', () => {
         { userID: '49', sleepQuality: 3.5 }
       ]);
   });
+
+  it('Should find the users who slept the most number of hours', () => {
+    expect(sleep.getAllUsersWhoSleptTheMostByDate('2019/06/23')).to.deep.equal(
+      [
+        { userID: 49, date: '2019/06/23', hoursSlept: 11, sleepQuality: 4.3 }
+      ]
+    );
+  });
 });
