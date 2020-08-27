@@ -58,6 +58,15 @@ const getUserDailySleepData = () => {
   dailyQualitySleep.innerText = sleep.getSleepQualityForSpecificDay(1, '2019/06/30');
 }
 
+const getUserWeeklySleepQuality = () => {
+  let sleepQualityData = sleep.getUserSleepQualityPerDayForWeek(1, '2019/06/23');
+  sleepQualityData.forEach(day => {
+    var sleepQualityDiv = document.createElement('div');
+    sleepQualityDiv.innerText = `${day.date} : ${day.sleepQuality}`;
+    weeklyQualitySleep.appendChild(sleepQualityDiv);
+  });
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
@@ -66,6 +75,7 @@ window.onload = () => {
   getUserWaterDrankToday()
   getUserWaterDrankForTheWeek()
   getUserDailySleepData();
+  getUserWeeklySleepQuality();
 };
 
 
