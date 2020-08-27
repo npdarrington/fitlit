@@ -56,4 +56,37 @@ describe('Sleep', () => {
   it('Should get all users average sleep quality', () => {
     expect(sleep.getAllUsersAverageSleepQuality()).to.equal(3);
   });
+
+  it('Should get all users sleep quality greater than 3 for a given week', () => {
+    expect(sleep.getAllUsersSleepQualityAboveThreeForAWeek('2019/06/23', '2019/06/29')).to.deep.equal(
+      [
+        { userID: '3', sleepQuality: 3.4 },
+        { userID: '4', sleepQuality: 3.6 },
+        { userID: '8', sleepQuality: 3 },
+        { userID: '10', sleepQuality: 3.8 },
+        { userID: '11', sleepQuality: 3 },
+        { userID: '12', sleepQuality: 3.1 },
+        { userID: '13', sleepQuality: 3.3 },
+        { userID: '15', sleepQuality: 3.1 },
+        { userID: '16', sleepQuality: 3.1 },
+        { userID: '17', sleepQuality: 3.3 },
+        { userID: '18', sleepQuality: 3.1 },
+        { userID: '19', sleepQuality: 3.5 },
+        { userID: '20', sleepQuality: 3.3 },
+        { userID: '21', sleepQuality: 3.4 },
+        { userID: '22', sleepQuality: 3 },
+        { userID: '25', sleepQuality: 3.1 },
+        { userID: '26', sleepQuality: 3.1 },
+        { userID: '27', sleepQuality: 3.1 },
+        { userID: '28', sleepQuality: 3.1 },
+        { userID: '32', sleepQuality: 3.8 },
+        { userID: '36', sleepQuality: 3.1 },
+        { userID: '37', sleepQuality: 4.3 },
+        { userID: '43', sleepQuality: 3.7 },
+        { userID: '44', sleepQuality: 3.2 },
+        { userID: '46', sleepQuality: 3.3 },
+        { userID: '48', sleepQuality: 3.1 },
+        { userID: '49', sleepQuality: 3.5 }
+      ]);
+  });
 });
