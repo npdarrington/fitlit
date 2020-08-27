@@ -38,4 +38,8 @@ describe('Activity',()=>{
     it('Should return average number of steps taken for a specified date for all user',()=>{
         expect(activity.returnAverageNumberOfStepsTakenForDay("2019/06/21")).to.equal()
     })
+    it('Should return average number of minutes active for a specified date for all user',()=>{
+        expect(activity.returnAverageNumberOfMinutesActiveForDay("2019/06/21")).to.equal()
+    })
+    
 })
