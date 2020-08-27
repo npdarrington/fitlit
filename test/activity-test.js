@@ -22,5 +22,8 @@ describe('Activity',()=>{
     it('Should return how many minutes active did they average for a given week', ()=>{
         expect(activity.returnAverageActiveMinutesForWeek(1,"2019/06/21"))
     })
-    it()
+    it('Should return if a user reached their step goal for a given day ',()=> {
+        expect(activity.returnIfUserReachedStepGoalForDay(1,"2019/06/28")).to.equal(true)
+    
+    })
 })
