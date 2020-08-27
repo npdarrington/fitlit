@@ -76,6 +76,11 @@ const getUserWeeklySleepQuality = () => {
   });
 }
 
+const getUserAllTimeSleepData = () => {
+  allTimeHoursSlept.innerText = sleep.getUserAverageSleptHoursPerDay(1);
+  allTimeQualitySleep.innerText = sleep.getUserAverageSleepQualityAllTime(1);
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
@@ -86,6 +91,7 @@ window.onload = () => {
   getUserDailySleepData();
   getUserWeeklyHoursSlept();
   getUserWeeklySleepQuality();
+  getUserAllTimeSleepData();
 };
 
 
