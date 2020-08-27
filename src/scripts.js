@@ -16,7 +16,8 @@ let allTimeHoursSlept = document.querySelector('.all-time-hours-slept');
 let allTimeQualitySleep = document.querySelector('.all-time-quality-sleep');
 let currentUser;
 const allUsers = new UserRepo(userData);
-const hydration = new Hydration(hydrationData)
+const hydration = new Hydration(hydrationData);
+const sleep = new Sleep(sleepData);
 const getCurrentUser = userData => {
   currentUser = new User(allUsers.returnUserData(1));
 }
