@@ -103,6 +103,22 @@ class Sleep {
     let getAllUsersSleepQualityAboveThreeForAWeek = getAllUsersAverageSleepQuality.filter(user => user.sleepQuality >= 3.0);
     return getAllUsersSleepQualityAboveThreeForAWeek;
   }
+
+  getAllUsersWhoSleptTheMostByDate(date) {
+    let getUsersByDate = this.sleepData.filter(users => {
+      return users.date === date;
+    });
+    let getHighestUserSleptHours = getUsersByDate.sort((user1, user2) => {
+      return user2.hoursSlept - user1.hoursSlept;
+    });
+    let getAllUsers = [];
+    getHighestUserSleptHours.filter(users => {
+      if (getHighestUserSleptHours[0].hoursSlept === users.hoursSlept) {
+        getAllUsers.push(users);
+      }
+    });
+    return getAllUsers;
+  }
 }
 
 if (typeof module !== 'undefined') {
