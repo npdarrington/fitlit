@@ -8,6 +8,12 @@ let userStepGoal = document.querySelector('.user-step-count');
 let allUsersStepGoal = document.querySelector('.all-users-step-count');
 let waterDrankToday = document.querySelector('.calculated-water-drank')
 let weeklyWaterIntake =  document.querySelector('.weekly-hydration')
+let dailyHoursSlept = document.querySelector('.daily-hours-slept');
+let dailyQualitySleep = document.querySelector('.daily-quality-sleep');
+let weeklyHoursSlept = document.querySelector('.weekly-hours-slept');
+let weeklyQualitySleep = document.querySelector('.weekly-quality-sleep');
+let allTimeHoursSlept = document.querySelector('.all-time-hours-slept');
+let allTimeQualitySleep = document.querySelector('.all-time-quality-sleep');
 let currentUser;
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData)
