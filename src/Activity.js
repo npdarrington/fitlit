@@ -48,6 +48,20 @@ class Activity {
         console.log(userStepGoal)
         return singleDay[0].numSteps > userStepGoal
     }
+    returnAlltimeStairClimbingRecord(userId){
+        let singleUserData = this.data.filter(user => {
+            return user.userID === userId;
+          });
+          let allUserStairsClimbed = singleUserData.map(date =>{
+              return date.flightsOfStairs
+          })
+          console.log(allUserStairsClimbed)
+          let allUserStairsClimbedSorted = allUserStairsClimbed.sort((a,b)=>{
+              return b-a
+          })
+          console.log(allUserStairsClimbedSorted)
+          return allUserStairsClimbedSorted[0]
+    }
 }
 if (typeof module !== 'undefined') {
     module.exports = Activity
