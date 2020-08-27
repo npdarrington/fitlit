@@ -84,8 +84,7 @@ class Activity {
             return acc +=curr
         },0)
 
-        let totalNumberOfUsers = this.findTotalNumberofUser()
-
+        let totalNumberOfUsers = this.findTotalNumberofUsers()
         console.log( Math.round(totalStepsInDay / totalNumberOfUsers))
         return Math.round(totalStepsInDay / totalNumberOfUsers)
     }
