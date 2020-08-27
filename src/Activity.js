@@ -1,22 +1,27 @@
 const User = require('./User.js')
+const UserRepo = require('./userRepo.js')
 const userTestData = require('../test/userTestData.js')
+let allUsers = new UserRepo(userTestData);
 class Activity {
     constructor(ActivityTestData){
         this.data = ActivityTestData
     }
     returnMilesWalkedForGivenDay(userId,date){
-        const user = new User(userId)
 
-        let singleUserData = this.sleepData.filter(user => {
+        let user = new User(allUsers.returnUserData(userId));
+
+        let singleUserData = this.data.filter(user => {
             return user.userID === userId;
           });
-         var SingleDay =  singleUserData.filter(user =>{
+         var singleDay =  singleUserData.filter(user =>{
               return user.date === date
           })
-        let UserNumberStepsPerMile = 5280/user.strideLength
-          
-        let milesWalked = SingleDay.stepsTaken / UserNumberStepsPerMile
-        return milesWalked
+        let userNumberStepsPerMile = Math.round(5280/user.userData.strideLength)
+        let milesWalked = singleDay[0].numSteps / userNumberStepsPerMile
+        return Math.round(milesWalked *100) /100
 
     }
 }
+if (typeof module !== 'undefined') {
+    module.exports = Activity
+  }
