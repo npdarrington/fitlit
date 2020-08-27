@@ -30,9 +30,12 @@ describe('Activity',()=>{
         expect(activity.returnAllDaysAUserReachedTheirStepGoal(1)).to.deep.equal()
     })
     it('Should return their all-time stair climbing record', ()=>{
-        expect(activity.returnAlltimeStairClimbingRecord).to.equal(39)
+        expect(activity.returnAlltimeStairClimbingRecord()).to.equal(39)
     })
     it('Should return average number of stairs climbed for a specified date for all user',()=>{
         expect(activity.returnAverageNumberOfStairsClimbedForDay("2019/06/21")).to.equal()
+    })
+    it('Should return average number of steps taken for a specified date for all user',()=>{
+        expect(activity.returnAverageNumberOfStepsTakenForDay("2019/06/21")).to.equal()
     })
 })
