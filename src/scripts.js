@@ -19,7 +19,7 @@ const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
 
-const getCurrentUser = userData => {
+const getCurrentUser = () => {
   currentUser = new User(allUsers.returnUserData(1));
 }
 
