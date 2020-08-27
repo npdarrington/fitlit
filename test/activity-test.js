@@ -13,7 +13,7 @@ beforeEach(function(){
 })
 describe('Activity',()=>{
     it('Should, given a specific day return the miles a user has walked based on their number of steps', () => {
-        expect(activity.returnMilesWalkedForGivenDay()).to.equal
+        expect(activity.returnMilesWalkedForGivenDay(1,"2019/06/28")).to.equal(8.56)
     })
     
 })
