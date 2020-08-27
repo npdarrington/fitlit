@@ -72,11 +72,14 @@ class Activity {
         let totalStairsClimbed = stairsClimbedInDay.reduce((acc,curr)=>{
             return acc +=curr
         },0)
-        let totalNumberOfUsers = new Set (this.data.map((user =>{
-            return user.userID
-        }))).size
+        let totalNumberOfUsers = this.findTotalNumberofUser()
 
         return Math.round(totalStairsClimbed / totalNumberOfUsers)
+    }
+    findTotalNumberofUser(){
+       return new Set (this.data.map((user =>{
+            return user.userID
+        }))).size
     }
 }
 if (typeof module !== 'undefined') {
