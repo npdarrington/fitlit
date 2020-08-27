@@ -76,11 +76,27 @@ class Activity {
 
         return Math.round(totalStairsClimbed / totalNumberOfUsers)
     }
-    findTotalNumberofUser(){
+    returnAverageNumberOfStepsTakenForDay(date){
+        let singleDay = this.data.filter(user => {
+            return user.date === date;
+          });
+        let stepsInDay =  singleDay.map(user =>{
+            return user.numSteps
+        })
+        let totalStepsInDay = stairsClimbedInDay.reduce((acc,curr)=>{
+            return acc +=curr
+        },0)
+        
+        let totalNumberOfUsers = this.findTotalNumberofUser()
+
+        return Math.round(totalStairsClimbed / totalNumberOfUsers)
+    }
+    findTotalNumberofUsers(){
        return new Set (this.data.map((user =>{
             return user.userID
         }))).size
     }
+
 }
 if (typeof module !== 'undefined') {
     module.exports = Activity
