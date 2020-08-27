@@ -13,13 +13,23 @@ class Activity {
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
           });
-         var singleDay =  singleUserData.filter(user =>{
+         let singleDay =  singleUserData.filter(user =>{
               return user.date === date
           })
         let userNumberStepsPerMile = Math.round(5280/user.userData.strideLength)
         let milesWalked = singleDay[0].numSteps / userNumberStepsPerMile
         return Math.round(milesWalked *100) /100
 
+    }
+    returnMinutesWalkedForGivenDay(userId,date){
+
+        let singleUserData = this.data.filter(user => {
+            return user.userID === userId;
+          });
+         let singleDay =  singleUserData.filter(user =>{
+              return user.date === date
+          })
+          return singleDay[0].minutesActive
     }
 }
 if (typeof module !== 'undefined') {
