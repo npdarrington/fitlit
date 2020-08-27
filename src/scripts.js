@@ -52,6 +52,12 @@ WaterIntakeDiv.innerText = `${day.date} : ${day.numOunces} ounces`
 weeklyWaterIntake.appendChild(WaterIntakeDiv)
 })
 }
+
+const getUserDailySleepData = () => {
+  dailyHoursSlept.innerText = sleep.getSleepHoursForSpecificDay(1, '2019/06/30');
+  dailyQualitySleep.innerText = sleep.getSleepQualityForSpecificDay(1, '2019/06/30');
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
@@ -59,6 +65,7 @@ window.onload = () => {
   getAllUsersStepGoal();
   getUserWaterDrankToday()
   getUserWaterDrankForTheWeek()
+  getUserDailySleepData();
 };
 
 
