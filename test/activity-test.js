@@ -24,6 +24,11 @@ describe('Activity',()=>{
     })
     it('Should return if a user reached their step goal for a given day ',()=> {
         expect(activity.returnIfUserReachedStepGoalForDay(1,"2019/06/28")).to.equal(true)
-    
+    })
+    it('Should return all days a user reached their step goal', ()=>{
+        expect(activity.returnAllDaysAUserReachedTheirStepGoal(1)).to.deep.equal()
+    })
+    it('Should return their all-time stair climbing record', ()=>{
+        expect(activity.returnAlltimeStairClimbingRecord).to.equal(39)
     })
 })
