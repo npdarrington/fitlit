@@ -31,6 +31,23 @@ class Activity {
           })
           return singleDay[0].minutesActive
     }
+    returnAverageActiveMinutesForWeek(){
+
+    }
+    returnIfUserReachedStepGoalForDay(userId,date){
+        let user = new User(allUsers.returnUserData(userId));
+        let userStepGoal = user.userData.dailyStepGoal
+        let singleUserData = this.data.filter(user => {
+            return user.userID === userId;
+          });
+          
+        let singleDay =  singleUserData.filter(user =>{
+            return user.date === date
+        })
+        console.log(singleDay[0].numSteps)
+        console.log(userStepGoal)
+        return singleDay[0].numSteps > userStepGoal
+    }
 }
 if (typeof module !== 'undefined') {
     module.exports = Activity
