@@ -63,7 +63,7 @@ const getUserWeeklyHoursSlept = () => {
   hoursSleptData.forEach(day => {
     var hoursSleptDiv = document.createElement('div');
     hoursSleptDiv.innerText = `${day.date} : ${day.hoursSlept}`;
-    weeklyQualitySleep.appendChild(hoursSleptDiv);
+    weeklyHoursSlept.appendChild(hoursSleptDiv);
   });
 }
 
