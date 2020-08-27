@@ -3,7 +3,8 @@ const expect = chai.expect
 const Activity = require('../src/Activity.js')
 const User = require ('../src/User.js');
 const activityTestData = require('./activity-test-data.js')
-const userTestData = require('./userTestData.js')
+const userTestData = require('./userTestData.js');
+const activityData = require('./activity-test-data.js');
 let activity;
 let user;
 
@@ -30,5 +31,8 @@ describe('Activity',()=>{
     })
     it('Should return their all-time stair climbing record', ()=>{
         expect(activity.returnAlltimeStairClimbingRecord).to.equal(39)
+    })
+    it('Should return average number of stairs climbed for a specified date for all user',()=>{
+        expect(activity.returnAverageNumberOfStairsClimbedForDay("2019/06/21")).to.equal()
     })
 })
