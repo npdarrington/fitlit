@@ -19,4 +19,8 @@ describe('Activity',()=>{
         expect(activity.returnMinutesWalkedForGivenDay(1,"2019/06/28")).to.equal(169)
 
     })
+    it('Should return how many minutes active did they average for a given week', ()=>{
+        expect(activity.returnAverageActiveMinutesForWeek(1,"2019/06/21"))
+    })
+    it()
 })
