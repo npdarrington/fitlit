@@ -18,6 +18,7 @@ let currentUser;
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
+
 const getCurrentUser = userData => {
   currentUser = new User(allUsers.returnUserData(1));
 }
@@ -40,21 +41,19 @@ const getAllUsersStepGoal = () => {
 }
 
 const getUserWaterDrankToday = () => {
-  waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(1,'2019/06/15')
+  waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(1,'2019/06/15');
 }
 const getUserWaterDrankForTheWeek = () => {
-  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(1,'2019/06/15')
+  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(1,'2019/06/15');
 
-UserHydration.forEach( (day) => {
-var WaterIntakeDiv = document.createElement(("div"))
-console.log(WaterIntakeDiv)
-WaterIntakeDiv.innerText = `${day.date} : ${day.numOunces} ounces`
-weeklyWaterIntake.appendChild(WaterIntakeDiv)
-})
+  UserHydration.forEach( (day) => {
+    var WaterIntakeDiv = document.createElement(("div"));
+    WaterIntakeDiv.innerText = `${day.date} : ${day.numOunces} ounces`;
+    weeklyWaterIntake.appendChild(WaterIntakeDiv);
+  });
 }
 
 const getUserDailySleepData = () => {
-  console.log(currentUser);
   dailyHoursSlept.innerText = sleep.getSleepHoursForSpecificDay(currentUser.userData.id, '2019/06/30');
   dailyQualitySleep.innerText = sleep.getSleepQualityForSpecificDay(currentUser.userData.id, '2019/06/30');
 }
@@ -87,13 +86,10 @@ window.onload = () => {
   populateUserData(currentUser);
   getUserStepGoal(currentUser);
   getAllUsersStepGoal();
-  getUserWaterDrankToday()
-  getUserWaterDrankForTheWeek()
+  getUserWaterDrankToday();
+  getUserWaterDrankForTheWeek();
   getUserDailySleepData();
   getUserWeeklyHoursSlept();
   getUserWeeklySleepQuality();
   getUserAllTimeSleepData();
 };
-
-
-// console.log("Hello World");
