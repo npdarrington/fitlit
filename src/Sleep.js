@@ -77,6 +77,32 @@ class Sleep {
     }, 0);
     return Math.round((totalSleepQualityOfUsers / this.sleepData.length) * 10) / 10;
   }
+
+  getAllUsersSleepQualityAboveThreeForAWeek(startDate, endDate) {
+    let filteredUsers = this.sleepData.filter(users => {
+      return users.date >= startDate && users.date <= endDate;
+    });
+    let getSleepQualityByUser = filteredUsers.reduce((object, user) => {
+      if (!object[user.userID]) {
+        object[user.userID] = [user.sleepQuality];
+      } else {
+        object[user.userID].push(user.sleepQuality);
+      }
+      return object;
+    }, {});
+    var result = Object.keys(getSleepQualityByUser).map(key => {
+      return { userID: key, sleepQuality: getSleepQualityByUser[key] }
+    });
+    let getAllUsersAverageSleepQuality = result.map(user => {
+      let total = 0;
+      user.sleepQuality.forEach(quality => {
+        total += quality;
+      });
+      return { userID: user.userID, sleepQuality: Math.round((total / user.sleepQuality.length) * 10) / 10 };
+    });
+    let getAllUsersSleepQualityAboveThreeForAWeek = getAllUsersAverageSleepQuality.filter(user => user.sleepQuality >= 3.0);
+    return getAllUsersSleepQualityAboveThreeForAWeek;
+  }
 }
 
 if (typeof module !== 'undefined') {
