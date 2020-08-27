@@ -41,10 +41,10 @@ const getAllUsersStepGoal = () => {
 }
 
 const getUserWaterDrankToday = () => {
-  waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(1,'2019/06/15');
+  waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id,'2019/06/15');
 }
 const getUserWaterDrankForTheWeek = () => {
-  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(1,'2019/06/15');
+  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id,'2019/06/15');
 
   UserHydration.forEach( (day) => {
     var WaterIntakeDiv = document.createElement(("div"));
