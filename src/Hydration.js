@@ -35,4 +35,6 @@ returnUserWeeklyFluidConsumption(UserId,startDate){
 }
 }
 
-module.exports = Hydration
+if (typeof module !== 'undefined') {
+    module.exports = Hydration;
+}
