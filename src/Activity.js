@@ -69,7 +69,7 @@ class Activity {
         let totalStairsClimbed = stairsClimbedInDay.reduce((acc,curr)=>{
             return acc +=curr
         },0)
-        let totalNumberOfUsers = this.findTotalNumberofUser()
+        let totalNumberOfUsers = this.findTotalNumberofUsers()
 
         return Math.round(totalStairsClimbed / totalNumberOfUsers)
     }
@@ -85,8 +85,21 @@ class Activity {
         },0)
 
         let totalNumberOfUsers = this.findTotalNumberofUsers()
-        console.log( Math.round(totalStepsInDay / totalNumberOfUsers))
         return Math.round(totalStepsInDay / totalNumberOfUsers)
+    }
+    returnAverageNumberOfMinutesActiveForDay(date){
+        let singleDay = this.data.filter(user => {
+            return user.date === date;
+          });
+        let minutesActiveInDay =  singleDay.map(user =>{
+            return user.minutesActive
+        })
+        let totalMinutesActiveInDay = minutesActiveInDay.reduce((acc,curr)=>{
+            return acc +=curr
+        },0)
+
+        let totalNumberOfUsers = this.findTotalNumberofUsers()
+        return Math.round(totalMinutesActiveInDay / totalNumberOfUsers)
     }
     findTotalNumberofUsers(){
        return new Set (this.data.map((user =>{
