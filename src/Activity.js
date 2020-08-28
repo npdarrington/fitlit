@@ -31,7 +31,20 @@ class Activity {
           })
           return singleDay[0].minutesActive
     }
-    returnAverageActiveMinutesForWeek(){
+    returnAverageActiveMinutesForWeek(userId,startDate){
+        let singleUserData = this.data.filter(user => { 
+            return user.userID === userId
+        })
+       var startDateObject =  singleUserData.find(user => user.date === startDate )
+       let indexOfstartDateObject = singleUserData.indexOf(startDateObject)
+       let minutesActive = singleUserData.map(user =>{
+          return user.minutesActive
+       })
+       let weeklyMinutesActive = minutesActive.splice(indexOfstartDateObject,7)
+      let totalMinutesActive =  weeklyMinutesActive.reduce((acc,curr)=>{
+           return acc+=curr
+       },0)
+       return totalMinutesActive / 7
 
     }
     returnIfUserReachedStepGoalForDay(userId,date){
@@ -53,7 +66,6 @@ class Activity {
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
           });
-          console.log(singleUserData)
         return singleUserData.reduce((acc,user) =>{
             if(user.numSteps >= userStepGoal){
                 let obj = {}
