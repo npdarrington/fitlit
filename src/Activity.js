@@ -47,6 +47,33 @@ class Activity {
        
         return singleDay[0].numSteps > userStepGoal
     }
+    returnAllDaysAUserReachedTheirStepGoal(userId){
+        let user = new User(allUsers.returnUserData(userId));
+        let userStepGoal = user.userData.dailyStepGoal
+        let singleUserData = this.data.filter(user => {
+            return user.userID === userId;
+          });
+          console.log(singleUserData)
+        return singleUserData.reduce((acc,user) =>{
+            if(user.numSteps >= userStepGoal){
+                let obj = {}
+                obj.date = user.date
+                obj.numSteps = user.numSteps
+                acc.push(obj)
+                return acc
+            }
+            return acc
+        },[])
+
+        // let daysWithEqulavlentOrHighernumSteps = this.data.filter(user => {
+        //     return user.numSteps >= userStepGoal
+        // })
+        // let daysWithEqulavlentOrHighernumSteps = this.data.map(user =>{
+        //     var obj = {}
+        //     obj.
+        //     return 
+        // })
+    }
     returnAlltimeStairClimbingRecord(userId){
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
