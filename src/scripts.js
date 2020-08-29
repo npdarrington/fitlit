@@ -19,13 +19,14 @@ let dailyMinutesActive = document.querySelector('.daily-minutes-active')
 let dailyMilesWalked  = document.querySelector('.daily-miles-walked')
 let currentUser;
 let indexOfUser  = 1
+const getCurrentUser = () => {
+  currentUser = new User(allUsers.returnUserData(1));
+  return currentUser
+}
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
-const activity = new Activity(activityData)
-const getCurrentUser = () => {
-  currentUser = new User(allUsers.returnUserData(1));
-}
+const activity = new Activity(activityData,getCurrentUser())
 
 const populateUserData = currentUser => {
   userTitle.innerText = currentUser.getUserName();

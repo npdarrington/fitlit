@@ -9,8 +9,8 @@ let activity;
 let user;
 
 beforeEach(function(){
-    activity = new Activity(activityTestData)
     user = new User(userTestData)
+    activity = new Activity(activityTestData,user)
 })
 describe('Activity',()=>{
     it('Should, given a specific day return the miles a user has walked based on their number of steps', () => {
