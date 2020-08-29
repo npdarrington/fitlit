@@ -26,20 +26,9 @@ class Sleep {
     return userSleepQualityAverage / singleUserData.length;
   }
 
-  getSleepHoursForSpecificDay(userId, date) {
+  getUserDailySleepStats(userId, date, prop) {
     const singleUserData = this.getCurrentUser(userId);
-    const getDataForSpecificDate = singleUserData.find(user => {
-      return user.date === date;
-    });
-    return getDataForSpecificDate.hoursSlept;
-  }
-
-  getSleepQualityForSpecificDay(userId, date) {
-    const singleUserData = this.getCurrentUser(userId);
-    const getDataForSpecificDate = singleUserData.find(user => {
-      return user.date === date;
-    });
-    return getDataForSpecificDate.sleepQuality;
+    return singleUserData.find(user => user.date === date)[prop];
   }
 
   getHoursSleptPerDayForWeek(userId, startDate) {
