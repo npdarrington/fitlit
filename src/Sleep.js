@@ -31,24 +31,14 @@ class Sleep {
     return singleUserData.find(user => user.date === date)[prop];
   }
 
-  getHoursSleptPerDayForWeek(userId, startDate) {
+  getUserWeeklySleepStats(userId, startDate, prop) {
     const singleUserData = this.getCurrentUser(userId);
     const startDateObject = singleUserData.find(user => user.date === startDate);
     const indexOfStartDateObject = singleUserData.indexOf(startDateObject);
     const getUserSevenDaySleepData = singleUserData.map(user => {
-      return { date: user.date, hoursSlept: user.hoursSlept }
+      return { date: user.date, [prop]: user[prop] }
     });
     return getUserSevenDaySleepData.splice(indexOfStartDateObject, 7).reverse();
-  }
-
-  getUserSleepQualityPerDayForWeek(userId, startDate) {
-    const singleUserData = this.getCurrentUser(userId);
-    const startDateObject = singleUserData.find(user => user.date === startDate);
-    const indexOfStartDateObject = singleUserData.indexOf(startDateObject);
-    const getUserSevenDaySleepQuality = singleUserData.map(user => {
-      return { date: user.date, sleepQuality: user.sleepQuality }
-    });
-    return getUserSevenDaySleepQuality.splice(indexOfStartDateObject, 7).reverse();
   }
 
   getAllUsersAverageSleepQuality() {
