@@ -98,19 +98,43 @@ const generateLeaderboard = (activityForLeaderBoard,date) =>{
   let singleDay = activity.data.filter(user => {
     return user.date === date;
   });
+  console.log('day',singleDay)
   let sortedArray = singleDay.sort((user,nextUser)=>{
-    return user[activityForLeaderBoard] - nextUser[activityForLeaderBoard]
+    return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
   })
+  console.log(`${activityForLeaderBoard}`,sortedArray)
   return sortedArray
 }
 const addDailyStepleaderBoard = () =>{
-
+let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
+console.log('sorted array',sortedArray )
+sortedArray.forEach((user,i) =>{
+  if(i<=5){
+    let userSection = document.createElement('div');
+    userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps}`;
+    dailyStepsLeaderBoard.appendChild(userSection)
+  }
+})
 }
 const addDailyminutesActiveBoard = () =>{
-  
+  let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
+sortedArray.forEach((user,i) =>{
+  if(i<5){
+    let userSection = document.createElement('div');
+    userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive}`;
+    dailyminutesActiveLeaderBoard.appendChild(userSection)
+  }
+})
 }
 const addDailyStairClimbedBoard = () =>{
-  
+  let sortedArray = generateLeaderboard('flightsOfStairs',"2019/06/28")
+sortedArray.forEach((user,i) =>{
+  if(i<=5){
+    let userSection = document.createElement('div');
+    userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.flightsOfStairs}`;
+    dailyStairsClimbed.appendChild(userSection)
+  }
+})
 }
 window.onload = () => {
   getCurrentUser(userData);
@@ -124,4 +148,7 @@ window.onload = () => {
   getUserWeeklySleepQuality();
   getUserAllTimeSleepData();
   getDailyActivityData()
+  addDailyStepleaderBoard()
+  addDailyminutesActiveBoard()
+  addDailyStairClimbedBoard()
 };
