@@ -91,7 +91,24 @@ const getDailyActivityData = () =>{
   dailyMinutesActive.innerText = `${activity.data[indexOfUser-1].minutesActive} minutes active `
   dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(indexOfUser,'2019/06/30')} miles walked`
 }
+const generateLeaderboard = (activityForLeaderBoard,date) =>{
+  let singleDay = activity.data.filter(user => {
+    return user.date === date;
+  });
+  let sortedArray = singleDay.sort((user,nextUser)=>{
+    return user[activityForLeaderBoard] - nextUser[activityForLeaderBoard]
+  })
+  return sortedArray
+}
+const addDailyStepleaderBoard = () =>{
 
+}
+const addDailyminutesActiveBoard = () =>{
+  
+}
+const addDailyStairClimbedBoard = () =>{
+  
+}
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
