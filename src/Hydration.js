@@ -7,10 +7,8 @@ class Hydration {
     return this.HydrationData.filter(user => user.userID === userId);
   }
 	
-  returnAverergeUserFluidOuncesConsumedAllTime(UserId) {
-    const singleUserData = this.HydrationData.filter(user => { 
-      return user.userID === UserId;
-    });
+  returnAverergeUserFluidOuncesConsumedAllTime(userId) {
+    const singleUserData = this.getCurrentUser(userId);
     const totalOuncesDrank = singleUserData.reduce((startingValue, user)=> {
       return startingValue += user.numOunces;
     }, 0);
@@ -18,16 +16,12 @@ class Hydration {
   }
 
   returnFluidOuncesForSpecificDay(userId, date) {
-    const singleUserData = this.HydrationData.filter(user => { 
-      return user.userID === userId;
-    });
+    const singleUserData = this.getCurrentUser(userId);
     return singleUserData.find(user => user.date === date).numOunces;
   }
 
-  returnUserWeeklyFluidConsumption(UserId, startDate) {
-    const singleUserData = this.HydrationData.filter(user => { 
-      return user.userID === UserId;
-    });
+  returnUserWeeklyFluidConsumption(userId, startDate) {
+    const singleUserData = this.getCurrentUser(userId);
     const startDateObject = singleUserData.find(user => user.date === startDate);
     const indexOfstartDateObject = singleUserData.indexOf(startDateObject);
     const UsernumOunces = singleUserData.map(user => {
