@@ -2,6 +2,10 @@ class Hydration {
   constructor(HydrationData) {
     this.HydrationData = HydrationData;
   }
+
+  getCurrentUser(userId) {
+    return this.HydrationData.filter(user => user.userID === userId);
+  }
 	
   returnAverergeUserFluidOuncesConsumedAllTime(UserId) {
     const singleUserData = this.HydrationData.filter(user => { 
