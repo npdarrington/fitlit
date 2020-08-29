@@ -3,6 +3,10 @@ class Sleep {
     this.sleepData = sleepData;
   }
 
+  getCurrentUser(userId) {
+    return this.sleepData.filter(user => user.userID === userId);
+  }
+
   getUserAverageSleptHoursPerDay(userId) {
     let singleUserData = this.sleepData.filter(user => {
       return user.userID === userId;
