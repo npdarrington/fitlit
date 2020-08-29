@@ -8,15 +8,14 @@ class Sleep {
   }
 
   getUserAverageSleptHoursPerDay(userId) {
-    let singleUserData = this.getCurrentUser(userId);
-    let userSleepPerDayAverage = singleUserData.reduce((total, user) => {
+    const singleUserData = this.getCurrentUser(userId);
+    const userSleepPerDayAverage = singleUserData.reduce((total, user) => {
       return total += user.hoursSlept;
     }, 0);
-    let averageUserSleepHours = userSleepPerDayAverage / singleUserData.length;
-    let getDecimalNumber = averageUserSleepHours.toString().split('.');
-    let turnDecimalIntoMinutes = Math.round(`.${getDecimalNumber[1]}` * 60);
-    let finalNumber = +(`${getDecimalNumber[0]}.${turnDecimalIntoMinutes}`);
-    return finalNumber;
+    const averageUserSleepHours = userSleepPerDayAverage / singleUserData.length;
+    const getDecimalNumber = averageUserSleepHours.toString().split('.');
+    const turnDecimalIntoMinutes = Math.round(`.${getDecimalNumber[1]}` * 60);
+    return +(`${getDecimalNumber[0]}.${turnDecimalIntoMinutes}`);
   }
 
   getUserAverageSleepQualityAllTime(userId) {
