@@ -8,9 +8,7 @@ class Sleep {
   }
 
   getUserAverageSleptHoursPerDay(userId) {
-    let singleUserData = this.sleepData.filter(user => {
-      return user.userID === userId;
-    });
+    let singleUserData = this.getCurrentUser(userId);
     let userSleepPerDayAverage = singleUserData.reduce((total, user) => {
       return total += user.hoursSlept;
     }, 0);
@@ -22,9 +20,7 @@ class Sleep {
   }
 
   getUserAverageSleepQualityAllTime(userId) {
-    let singleUserData = this.sleepData.filter(user => {
-      return user.userID === userId;
-    });
+    let singleUserData = this.getCurrentUser(userId);
     let userSleepQualityAverage =  singleUserData.reduce((total, user) => {
       return total += user.sleepQuality;
     }, 0);
@@ -32,9 +28,7 @@ class Sleep {
   }
 
   getSleepHoursForSpecificDay(userId, date) {
-    let singleUserData = this.sleepData.filter(user => {
-      return user.userID === userId;
-    });
+    let singleUserData = this.getCurrentUser(userId);
     let getDataForSpecificDate = singleUserData.find(user => {
       return user.date === date;
     });
@@ -42,9 +36,7 @@ class Sleep {
   }
 
   getSleepQualityForSpecificDay(userId, date) {
-    let singleUserData = this.sleepData.filter(user => {
-      return user.userID === userId;
-    });
+    let singleUserData = this.getCurrentUser(userId);
     let getDataForSpecificDate = singleUserData.find(user => {
       return user.date === date;
     });
@@ -52,9 +44,7 @@ class Sleep {
   }
 
   getHoursSleptPerDayForWeek(userId, startDate) {
-    let singleUserData = this.sleepData.filter(user => {
-      return user.userID === userId;
-    });
+    let singleUserData = this.getCurrentUser(userId);
     let startDateObject = singleUserData.find(user => user.date === startDate);
     let indexOfStartDateObject = singleUserData.indexOf(startDateObject);
     let getUserSevenDaySleepData = singleUserData.map(user => {
@@ -64,9 +54,7 @@ class Sleep {
   }
 
   getUserSleepQualityPerDayForWeek(userId, startDate) {
-    let singleUserData = this.sleepData.filter(user => {
-      return user.userID === userId;
-    });
+    let singleUserData = this.getCurrentUser(userId);
     let startDateObject = singleUserData.find(user => user.date === startDate);
     let indexOfStartDateObject = singleUserData.indexOf(startDateObject);
     let getUserSevenDaySleepQuality = singleUserData.map(user => {
