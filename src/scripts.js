@@ -16,15 +16,15 @@ let allTimeHoursSlept = document.querySelector('.all-time-hours-slept');
 let allTimeQualitySleep = document.querySelector('.all-time-quality-sleep');
 let dailyStepCount = document.querySelector('.daily-step-count')
 let dailyMinutesActive = document.querySelector('.daily-minutes-active')
+let dailyMilesWalked  = document.querySelector('.daily-miles-walked')
 let currentUser;
-let indexOfUser  = 0
+let indexOfUser  = 1
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
 const activity = new Activity(activityData)
-
 const getCurrentUser = () => {
-  currentUser = new User(allUsers.returnUserData(indexOfUser+ 1));
+  currentUser = new User(allUsers.returnUserData(1));
 }
 
 const populateUserData = currentUser => {
@@ -86,9 +86,9 @@ const getUserAllTimeSleepData = () => {
 }
 
 const getDailyActivityData = () =>{
-  dailyStepCount.innerText = `${activity.data[indexOfUser].numSteps} steps `
-  dailyMinutesActive.innerText = `${activity.data[indexOfUser].minutesActive} minutes active `
-
+  dailyStepCount.innerText = `${activity.data[indexOfUser-1].numSteps} steps `
+  dailyMinutesActive.innerText = `${activity.data[indexOfUser-1].minutesActive} minutes active `
+  dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(indexOfUser,'2019/06/30')} miles walked`
 }
 
 window.onload = () => {
