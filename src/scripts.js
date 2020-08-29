@@ -14,13 +14,17 @@ let weeklyHoursSlept = document.querySelector('.weekly-hours-slept');
 let weeklyQualitySleep = document.querySelector('.weekly-quality-sleep');
 let allTimeHoursSlept = document.querySelector('.all-time-hours-slept');
 let allTimeQualitySleep = document.querySelector('.all-time-quality-sleep');
+let dailyStepCount = document.querySelector('.daily-step-count')
+let dailyMinutesActive = document.querySelector('.daily-minutes-active')
 let currentUser;
+let indexOfUser  = 0
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
+const activity = new Activity(activityData)
 
 const getCurrentUser = () => {
-  currentUser = new User(allUsers.returnUserData(1));
+  currentUser = new User(allUsers.returnUserData(indexOfUser+ 1));
 }
 
 const populateUserData = currentUser => {
@@ -81,6 +85,12 @@ const getUserAllTimeSleepData = () => {
   allTimeQualitySleep.innerText = sleep.getUserAverageSleepQualityAllTime(currentUser.userData.id);
 }
 
+const getDailyActivityData = () =>{
+  dailyStepCount.innerText = `${activity.data[indexOfUser].numSteps} steps `
+  dailyMinutesActive.innerText = `${activity.data[indexOfUser].minutesActive} minutes active `
+
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
@@ -92,4 +102,5 @@ window.onload = () => {
   getUserWeeklyHoursSlept();
   getUserWeeklySleepQuality();
   getUserAllTimeSleepData();
+  getDailyActivityData()
 };
