@@ -17,6 +17,9 @@ let allTimeQualitySleep = document.querySelector('.all-time-quality-sleep');
 let dailyStepCount = document.querySelector('.daily-step-count')
 let dailyMinutesActive = document.querySelector('.daily-minutes-active')
 let dailyMilesWalked  = document.querySelector('.daily-miles-walked')
+let dailyStepsLeaderBoard = document.querySelector('.number-of-steps-leaderboard')
+let dailyminutesActiveLeaderBoard = document.querySelector('.minutes-active-leaderboard')
+let dailyStairsClimbed = document.querySelector('.stairs-climbed-leaderboard')
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
