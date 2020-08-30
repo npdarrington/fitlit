@@ -5,11 +5,21 @@
 }
 
 :root {
-  --body-bg-color: #323a45;
+  --body-bg-color-top: #87CEFA;
+  --body-bg-color: #fff;
 }
 
 body {
-  background-color: var(--body-bg-color);
   display: flex;
-  justify-content: center;
+  background-color: var(--body-bg-color);
+}
+
+#user-top {
+  background-color: var(--body-bg-color-top);
+  width: 100vw;
+  height: 25vh;
+}
+
+#container {
+  padding: 20px 50px;
 }
