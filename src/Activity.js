@@ -1,27 +1,22 @@
-const User = require('./User.js')
-const UserRepo = require('./userRepo.js')
-const userTestData = require('../test/userTestData.js')
-let allUsers = new UserRepo(userTestData);
 class Activity {
-    constructor(ActivityTestData){
+    constructor(ActivityTestData,user){
         this.data = ActivityTestData
+        this.user =user
     }
     returnMilesWalkedForGivenDay(userId,date){
-
-        let user = new User(allUsers.returnUserData(userId));
-
+        let user = this.user.userData
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
           });
          let singleDay =  singleUserData.filter(user =>{
               return user.date === date
           })
-        let userNumberStepsPerMile = Math.round(5280/user.userData.strideLength)
+        let userNumberStepsPerMile = Math.round(5280/user.strideLength)
         let milesWalked = singleDay[0].numSteps / userNumberStepsPerMile
         return Math.round(milesWalked *100) /100
 
     }
-    returnMinutesWalkedForGivenDay(userId,date){
+    returnMinutesActiveForGivenDay(userId,date){
 
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
@@ -30,6 +25,25 @@ class Activity {
               return user.date === date
           })
           return singleDay[0].minutesActive
+    }
+    returnActvityWeeklyOverview(userId,date,activity){
+        let singleUserData = this.data.filter(user => { 
+            return user.userID === userId
+        })
+        console.log(singleUserData)
+       let dateObject =  singleUserData.find(user => user.date === date )
+       console.log(dateObject)
+       let indexOfstartDateObject = singleUserData.indexOf(dateObject)
+       console.log(indexOfstartDateObject)
+       var userActivity = singleUserData.map(user =>{
+           var dataAndNumOfOuncesDrank = {}
+           dataAndNumOfOuncesDrank.date  = user.date;
+           dataAndNumOfOuncesDrank[activity] =  user[activity];
+                 return dataAndNumOfOuncesDrank
+       })
+       console.log(userActivity)
+       var splicedArray = userActivity.slice(indexOfstartDateObject -7,indexOfstartDateObject+1 ).reverse()
+        return splicedArray
     }
     returnAverageActiveMinutesForWeek(userId,startDate){
         let singleUserData = this.data.filter(user => { 
@@ -48,8 +62,8 @@ class Activity {
 
     }
     returnIfUserReachedStepGoalForDay(userId,date){
-        let user = new User(allUsers.returnUserData(userId));
-        let userStepGoal = user.userData.dailyStepGoal
+        let user = this.user.userData
+        let userStepGoal = user.dailyStepGoal
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
           });
@@ -61,8 +75,8 @@ class Activity {
         return singleDay[0].numSteps > userStepGoal
     }
     returnAllDaysAUserReachedTheirStepGoal(userId){
-        let user = new User(allUsers.returnUserData(userId));
-        let userStepGoal = user.userData.dailyStepGoal
+        let user = this.user.userData
+        let userStepGoal = user.dailyStepGoal
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
           });
@@ -77,14 +91,6 @@ class Activity {
             return acc
         },[])
 
-        // let daysWithEqulavlentOrHighernumSteps = this.data.filter(user => {
-        //     return user.numSteps >= userStepGoal
-        // })
-        // let daysWithEqulavlentOrHighernumSteps = this.data.map(user =>{
-        //     var obj = {}
-        //     obj.
-        //     return 
-        // })
     }
     returnAlltimeStairClimbingRecord(userId){
         let singleUserData = this.data.filter(user => {
