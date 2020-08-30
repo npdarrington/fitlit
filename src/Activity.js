@@ -30,18 +30,14 @@ class Activity {
         let singleUserData = this.data.filter(user => { 
             return user.userID === userId
         })
-        console.log(singleUserData)
        let dateObject =  singleUserData.find(user => user.date === date )
-       console.log(dateObject)
        let indexOfstartDateObject = singleUserData.indexOf(dateObject)
-       console.log(indexOfstartDateObject)
        var userActivity = singleUserData.map(user =>{
            var dataAndNumOfOuncesDrank = {}
            dataAndNumOfOuncesDrank.date  = user.date;
            dataAndNumOfOuncesDrank[activity] =  user[activity];
                  return dataAndNumOfOuncesDrank
        })
-       console.log(userActivity)
        var splicedArray = userActivity.slice(indexOfstartDateObject -7,indexOfstartDateObject+1 ).reverse()
         return splicedArray
     }

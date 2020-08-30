@@ -23,7 +23,7 @@ let dailyStairsClimbed = document.querySelector('.stairs-climbed-leaderboard')
 let stepsWeeklyOverview = document.querySelector('.steps-weekly-overview')
 let minutesActiveWeeklyOverview = document.querySelector('.minutes-active-weekly-overview')
 let flightsOfStairsWeeklyOverview = document.querySelector('.flights-of-stairs-weekly-overview')
-
+let friendLeaderBoard = document.querySelector('.friend-stepcount-leaderboard')
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
@@ -66,12 +66,12 @@ const getUserWaterDrankForTheWeek = () => {
 }
 
 const getUserDailySleepData = () => {
-  dailyHoursSlept.innerText = sleep.getSleepHoursForSpecificDay(currentUser.userData.id, '2019/06/30');
-  dailyQualitySleep.innerText = sleep.getSleepQualityForSpecificDay(currentUser.userData.id, '2019/06/30');
+  dailyHoursSlept.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','hoursSlept');
+  dailyQualitySleep.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','sleepQuality');
 }
 
 const getUserWeeklyHoursSlept = () => {
-  let hoursSleptData = sleep.getHoursSleptPerDayForWeek(currentUser.userData.id, '2019/06/23');
+  let hoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','hoursSlept');
   hoursSleptData.forEach(day => {
     var hoursSleptDiv = document.createElement('div');
     hoursSleptDiv.innerText = `${day.date} : ${day.hoursSlept}`;
@@ -80,7 +80,7 @@ const getUserWeeklyHoursSlept = () => {
 }
 
 const getUserWeeklySleepQuality = () => {
-  let sleepQualityData = sleep.getUserSleepQualityPerDayForWeek(currentUser.userData.id, '2019/06/23');
+  let sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','sleepQuality');
   sleepQualityData.forEach(day => {
     var sleepQualityDiv = document.createElement('div');
     sleepQualityDiv.innerText = `${day.date} : ${day.sleepQuality}`;
@@ -162,6 +162,49 @@ const getWeeklyOverview = () => {
 
   }
 
+const createFriendsSection = () => {
+  let friends = allUsers.userData.filter(user => {
+      return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
+    })
+  let friendsWeeklySteps = findFriendsWeeklySteps(friends)
+  var stepCounts =  findUserStepCounts(friendsWeeklySteps)
+
+  var sortedSteps = stepCounts.sort((firstValue,secondValue) => {
+  return secondValue.steps - firstValue.steps
+  })
+  addFriendsToHtml(sortedSteps)
+}
+findFriendsWeeklySteps = (friends) =>{
+  return friends.map(user => {
+    return { 
+      id : user.id,
+      date : activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
+    }
+  })
+}
+addFriendsToHtml = (sortedSteps) =>{
+  sortedSteps.forEach(user =>{
+    var friendSection = document.createElement('div')
+    if(user.id === indexOfUser ){
+      friendSection.innerText = `You : ${user.steps} steps`
+
+    }else{
+    friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
+  }
+    friendLeaderBoard.appendChild(friendSection)
+  })
+}
+findUserStepCounts = (friendsWeeklySteps) => {
+  return friendsWeeklySteps.map(userSteps =>{
+    var obj = {}
+    obj.id = userSteps.id
+    obj.steps =  userSteps.date.reduce((startingValue,date) =>{
+      return startingValue += date.numSteps
+    },0)
+    return obj
+  })
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
@@ -178,4 +221,5 @@ window.onload = () => {
   addDailyminutesActiveBoard()
   addDailyStairClimbedBoard()
   getWeeklyOverview()
+  createFriendsSection()
 };
