@@ -16,7 +16,7 @@ class Activity {
         return Math.round(milesWalked *100) /100
 
     }
-    returnMinutesWalkedForGivenDay(userId,date){
+    returnMinutesActiveForGivenDay(userId,date){
 
         let singleUserData = this.data.filter(user => {
             return user.userID === userId;
@@ -25,6 +25,25 @@ class Activity {
               return user.date === date
           })
           return singleDay[0].minutesActive
+    }
+    returnActvityWeeklyOverview(userId,date,activity){
+        let singleUserData = this.data.filter(user => { 
+            return user.userID === userId
+        })
+        console.log(singleUserData)
+       let dateObject =  singleUserData.find(user => user.date === date )
+       console.log(dateObject)
+       let indexOfstartDateObject = singleUserData.indexOf(dateObject)
+       console.log(indexOfstartDateObject)
+       var userActivity = singleUserData.map(user =>{
+           var dataAndNumOfOuncesDrank = {}
+           dataAndNumOfOuncesDrank.date  = user.date;
+           dataAndNumOfOuncesDrank[activity] =  user[activity];
+                 return dataAndNumOfOuncesDrank
+       })
+       console.log(userActivity)
+       var splicedArray = userActivity.slice(indexOfstartDateObject -7,indexOfstartDateObject+1 ).reverse()
+        return splicedArray
     }
     returnAverageActiveMinutesForWeek(userId,startDate){
         let singleUserData = this.data.filter(user => { 

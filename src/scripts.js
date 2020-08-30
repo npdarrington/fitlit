@@ -20,6 +20,10 @@ let dailyMilesWalked  = document.querySelector('.daily-miles-walked')
 let dailyStepsLeaderBoard = document.querySelector('.number-of-steps-leaderboard')
 let dailyminutesActiveLeaderBoard = document.querySelector('.minutes-active-leaderboard')
 let dailyStairsClimbed = document.querySelector('.stairs-climbed-leaderboard')
+let stepsWeeklyOverview = document.querySelector('.steps-weekly-overview')
+let minutesActiveWeeklyOverview = document.querySelector('.minutes-active-weekly-overview')
+let flightsOfStairsWeeklyOverview = document.querySelector('.flights-of-stairs-weekly-overview')
+
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
@@ -98,16 +102,13 @@ const generateLeaderboard = (activityForLeaderBoard,date) =>{
   let singleDay = activity.data.filter(user => {
     return user.date === date;
   });
-  console.log('day',singleDay)
   let sortedArray = singleDay.sort((user,nextUser)=>{
     return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
   })
-  console.log(`${activityForLeaderBoard}`,sortedArray)
   return sortedArray
 }
 const addDailyStepleaderBoard = () =>{
 let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
-console.log('sorted array',sortedArray )
 sortedArray.forEach((user,i) =>{
   if(i<=5){
     let userSection = document.createElement('div');
@@ -136,6 +137,31 @@ sortedArray.forEach((user,i) =>{
   }
 })
 }
+const putWeeklyOverViewOnDom = (stepCountOverView,activity,domElement) => {
+  stepCountOverView.forEach(date =>{
+    let userSection = document.createElement('div');
+    let sufix;
+    if(activity === 'numSteps'){
+      sufix = 'Steps'
+    }
+    else if(activity === 'minutesActive'){
+      sufix = 'Minutes Active'
+
+    }
+    else{
+      sufix = 'Stairs'
+    }
+    userSection.innerText = `${date.date} : ${date[activity]} ${sufix}`;
+    domElement.appendChild(userSection)
+  })
+}
+const getWeeklyOverview = () => {
+  putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'numSteps'),'numSteps',stepsWeeklyOverview)
+  putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'minutesActive'),'minutesActive',minutesActiveWeeklyOverview)
+  putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'flightsOfStairs'),'flightsOfStairs',flightsOfStairsWeeklyOverview)
+
+  }
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
@@ -151,4 +177,5 @@ window.onload = () => {
   addDailyStepleaderBoard()
   addDailyminutesActiveBoard()
   addDailyStairClimbedBoard()
+  getWeeklyOverview()
 };
