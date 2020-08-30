@@ -23,7 +23,7 @@ let dailyStairsClimbed = document.querySelector('.stairs-climbed-leaderboard')
 let stepsWeeklyOverview = document.querySelector('.steps-weekly-overview')
 let minutesActiveWeeklyOverview = document.querySelector('.minutes-active-weekly-overview')
 let flightsOfStairsWeeklyOverview = document.querySelector('.flights-of-stairs-weekly-overview')
-
+let friendLeaderBoard = document.querySelector('.friend-stepcount-leaderboard')
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
@@ -172,7 +172,15 @@ return friends
 const createFriendsSection = () => {
   var friends = createFriendsLeaderBoard () 
   friends.forEach(user =>{
-    
+    var friendSection = document.createElement('div')
+    if(user.userID === indexOfUser ){
+      friendSection.innerText = `You : ${user.numSteps}`
+
+    }else{
+   
+    friendSection.innerText = `${allUsers.userData[user.userID].name}: ${user.numSteps}`
+  }
+    friendLeaderBoard.appendChild(friendSection)
   })
 }
 window.onload = () => {
@@ -191,4 +199,5 @@ window.onload = () => {
   addDailyminutesActiveBoard()
   addDailyStairClimbedBoard()
   getWeeklyOverview()
+  createFriendsSection()
 };
