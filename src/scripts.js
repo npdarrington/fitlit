@@ -170,15 +170,35 @@ let friends = sortedArray.filter(user => {
 return friends
 }
 const createFriendsSection = () => {
-  var friends = createFriendsLeaderBoard () 
-  friends.forEach(user =>{
+  let friends = allUsers.userData.filter(user => {
+    console.log(user)
+    return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
+  })
+  console.log(friends)
+  var friendWeeklySteps =friends.map(user => {
+    var obj = {}
+    obj.id = user.id
+    obj.date = activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
+    return obj
+  })
+var stepCounts =  friendWeeklySteps.map(userSteps =>{
+  var obj = {}
+  obj.id = userSteps.id
+  obj.steps =  userSteps.date.reduce((startingValue,date) =>{
+    return startingValue += date.numSteps
+  },0)
+  return obj
+})
+var sortedSteps = stepCounts.sort((firstValue,secondValue) =>{
+  return secondValue.steps - firstValue.steps
+})
+sortedSteps.forEach(user =>{
     var friendSection = document.createElement('div')
-    if(user.userID === indexOfUser ){
-      friendSection.innerText = `You : ${user.numSteps}`
+    if(user.id === indexOfUser ){
+      friendSection.innerText = `You : ${user.steps} steps`
 
     }else{
-   
-    friendSection.innerText = `${allUsers.userData[user.userID].name}: ${user.numSteps}`
+    friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
   }
     friendLeaderBoard.appendChild(friendSection)
   })
