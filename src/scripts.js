@@ -66,12 +66,12 @@ const getUserWaterDrankForTheWeek = () => {
 }
 
 const getUserDailySleepData = () => {
-  dailyHoursSlept.innerText = sleep.getSleepHoursForSpecificDay(currentUser.userData.id, '2019/06/30');
-  dailyQualitySleep.innerText = sleep.getSleepQualityForSpecificDay(currentUser.userData.id, '2019/06/30');
+  dailyHoursSlept.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','hoursSlept');
+  dailyQualitySleep.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','sleepQuality');
 }
 
 const getUserWeeklyHoursSlept = () => {
-  let hoursSleptData = sleep.getHoursSleptPerDayForWeek(currentUser.userData.id, '2019/06/23');
+  let hoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','hoursSlept');
   hoursSleptData.forEach(day => {
     var hoursSleptDiv = document.createElement('div');
     hoursSleptDiv.innerText = `${day.date} : ${day.hoursSlept}`;
@@ -80,7 +80,7 @@ const getUserWeeklyHoursSlept = () => {
 }
 
 const getUserWeeklySleepQuality = () => {
-  let sleepQualityData = sleep.getUserSleepQualityPerDayForWeek(currentUser.userData.id, '2019/06/23');
+  let sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','sleepQuality');
   sleepQualityData.forEach(day => {
     var sleepQualityDiv = document.createElement('div');
     sleepQualityDiv.innerText = `${day.date} : ${day.sleepQuality}`;
