@@ -18,15 +18,15 @@ describe('Sleep', () => {
   });
 
   it('Should show a user how many hours they slept for a specific date', () => {
-    expect(sleep.getSleepHoursForSpecificDay(1, '2019/06/29')).to.equal(5.3);
+    expect(sleep.getUserDailySleepStats(1, '2019/06/29', 'hoursSlept')).to.equal(5.3);
   });
 
   it('Should show a user their sleep quality for a specific date', () => {
-    expect(sleep.getSleepQualityForSpecificDay(1, '2019/06/29')).to.equal(1.2);
+    expect(sleep.getUserDailySleepStats(1, '2019/06/29', 'sleepQuality')).to.equal(1.2);
   });
 
   it('Should show a user their sleep hours each day over 7 days', () => {
-    expect(sleep.getHoursSleptPerDayForWeek(1, '2019/06/23')).to.deep.equal(
+    expect(sleep.getUserWeeklySleepStats(1, '2019/06/23', 'hoursSlept')).to.deep.equal(
       [
         { date: '2019/06/29', hoursSlept: 5.3 },
         { date: '2019/06/28', hoursSlept: 7.6 },
@@ -40,7 +40,7 @@ describe('Sleep', () => {
   });
 
   it('Should show a user their sleep quality each day over 7 days', () => {
-    expect(sleep.getUserSleepQualityPerDayForWeek(1, '2019/06/23')).to.deep.equal(
+    expect(sleep.getUserWeeklySleepStats(1, '2019/06/23', 'sleepQuality')).to.deep.equal(
       [
         { date: '2019/06/29', sleepQuality: 1.2 },
         { date: '2019/06/28', sleepQuality: 4.7 },
