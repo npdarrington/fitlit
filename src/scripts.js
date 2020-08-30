@@ -161,38 +161,29 @@ const getWeeklyOverview = () => {
   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'flightsOfStairs'),'flightsOfStairs',flightsOfStairsWeeklyOverview)
 
   }
-const createFriendsLeaderBoard = () =>{
-let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
-let friends = sortedArray.filter(user => {
-  return currentUser.userData.friends.includes(user.userID) || user.userID === indexOfUser
-   
-})
-return friends
-}
+
 const createFriendsSection = () => {
   let friends = allUsers.userData.filter(user => {
-    console.log(user)
-    return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
-  })
-  console.log(friends)
-  var friendWeeklySteps =friends.map(user => {
-    var obj = {}
-    obj.id = user.id
-    obj.date = activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
-    return obj
-  })
-var stepCounts =  friendWeeklySteps.map(userSteps =>{
-  var obj = {}
-  obj.id = userSteps.id
-  obj.steps =  userSteps.date.reduce((startingValue,date) =>{
-    return startingValue += date.numSteps
-  },0)
-  return obj
-})
-var sortedSteps = stepCounts.sort((firstValue,secondValue) =>{
+      return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
+    })
+  let friendsWeeklySteps = findFriendsWeeklySteps(friends)
+  var stepCounts =  findUserStepCounts(friendsWeeklySteps)
+
+  var sortedSteps = stepCounts.sort((firstValue,secondValue) => {
   return secondValue.steps - firstValue.steps
-})
-sortedSteps.forEach(user =>{
+  })
+  addFriendsToHtml(sortedSteps)
+}
+findFriendsWeeklySteps = (friends) =>{
+  return friends.map(user => {
+    return { 
+      id : user.id,
+      date : activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
+    }
+  })
+}
+addFriendsToHtml = (sortedSteps) =>{
+  sortedSteps.forEach(user =>{
     var friendSection = document.createElement('div')
     if(user.id === indexOfUser ){
       friendSection.innerText = `You : ${user.steps} steps`
@@ -203,6 +194,17 @@ sortedSteps.forEach(user =>{
     friendLeaderBoard.appendChild(friendSection)
   })
 }
+findUserStepCounts = (friendsWeeklySteps) => {
+  return friendsWeeklySteps.map(userSteps =>{
+    var obj = {}
+    obj.id = userSteps.id
+    obj.steps =  userSteps.date.reduce((startingValue,date) =>{
+      return startingValue += date.numSteps
+    },0)
+    return obj
+  })
+}
+
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
