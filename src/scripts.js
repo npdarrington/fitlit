@@ -161,7 +161,20 @@ const getWeeklyOverview = () => {
   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'flightsOfStairs'),'flightsOfStairs',flightsOfStairsWeeklyOverview)
 
   }
-
+const createFriendsLeaderBoard = () =>{
+let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
+let friends = sortedArray.filter(user => {
+  return currentUser.userData.friends.includes(user.userID) || user.userID === indexOfUser
+   
+})
+return friends
+}
+const createFriendsSection = () => {
+  var friends = createFriendsLeaderBoard () 
+  friends.forEach(user =>{
+    
+  })
+}
 window.onload = () => {
   getCurrentUser(userData);
   populateUserData(currentUser);
