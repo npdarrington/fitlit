@@ -12,10 +12,9 @@ class Sleep {
     const userSleepPerDayAverage = singleUserData.reduce((total, user) => {
       return total += user.hoursSlept;
     }, 0);
-    const averageUserSleepHours = userSleepPerDayAverage / singleUserData.length;
-    const getDecimalNumber = averageUserSleepHours.toString().split('.');
-    const turnDecimalIntoMinutes = Math.round(`.${getDecimalNumber[1]}` * 60);
-    return +(`${getDecimalNumber[0]}.${turnDecimalIntoMinutes}`);
+    const calculateHours = Math.floor(Math.abs(userSleepPerDayAverage / singleUserData.length));
+    const calculateMins = Math.floor(Math.abs((userSleepPerDayAverage / singleUserData.length) * 60) % 60);
+    return +(`${calculateHours}.${calculateMins}`);
   }
 
   getUserAverageSleepQualityAllTime(userId) {
