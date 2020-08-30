@@ -52,26 +52,31 @@ class Sleep {
     const filteredUsers = this.sleepData.filter(users => {
       return users.date >= startDate && users.date <= endDate;
     });
-    const getSleepQualityByUser = filteredUsers.reduce((object, user) => {
+    const getSleepQualityByUserID = this.combineAllSleepQualityByUserID(filteredUsers);
+    const averageEachUserSleepQuality = this.averageSleepQualityByUserID(getSleepQualityByUserID);
+    return averageEachUserSleepQuality.filter(user => user.sleepQuality >= 3.0);
+  }
+
+  combineAllSleepQualityByUserID(userData) {
+    return userData.reduce((object, user) => {
       if (!object[user.userID]) {
-        object[user.userID] = [user.sleepQuality];
-      } else {
-        object[user.userID].push(user.sleepQuality);
+        object[user.userID] = [];
       }
+      object[user.userID].push(user.sleepQuality);
       return object;
     }, {});
-    const result = Object.keys(getSleepQualityByUser).map(key => {
-      return { userID: key, sleepQuality: getSleepQualityByUser[key] }
+  }
+
+  averageSleepQualityByUserID(userData) {
+    return Object.keys(userData).map(userID => {
+      let allSleepTotals = userData[userID].reduce((total, num) => {
+        return total += num;
+      }, 0);
+      return { 
+        userID, 
+        sleepQuality: Math.round((allSleepTotals / userData[userID].length) * 10) / 10
+      }
     });
-    const getAllUsersAverageSleepQuality = result.map(user => {
-      let total = 0;
-      user.sleepQuality.forEach(quality => {
-        total += quality;
-      });
-      return { userID: user.userID, sleepQuality: Math.round((total / user.sleepQuality.length) * 10) / 10 };
-    });
-    const getAllUsersSleepQualityAboveThreeForAWeek = getAllUsersAverageSleepQuality.filter(user => user.sleepQuality >= 3.0);
-    return getAllUsersSleepQualityAboveThreeForAWeek;
   }
 
   getAllUsersWhoSleptTheMostByDate(date) {
@@ -81,13 +86,9 @@ class Sleep {
     const getHighestUserSleptHours = getUsersByDate.sort((user1, user2) => {
       return user2.hoursSlept - user1.hoursSlept;
     });
-    const getAllUsers = [];
-    getHighestUserSleptHours.filter(users => {
-      if (getHighestUserSleptHours[0].hoursSlept === users.hoursSlept) {
-        getAllUsers.push(users);
-      }
+    return getHighestUserSleptHours.filter(users => {
+      return getHighestUserSleptHours[0].hoursSlept === users.hoursSlept;
     });
-    return getAllUsers;
   }
 }
 
