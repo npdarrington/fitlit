@@ -4,7 +4,7 @@ class Activity {
     this.user = user
   }
   returnMilesWalkedForGivenDay(userId, date) {
-    let user = this.user.userData
+    let user = this.user.userData[userId - 1]
     let singleUserData = this.data.filter(user => {
       return user.userID === userId;
     });
@@ -40,7 +40,7 @@ class Activity {
     return splicedArray
   }
   returnIfUserReachedStepGoalForDay(userId, date) {
-    let user = this.user.userData
+    let user = this.user.userData[userId -1]
     let userStepGoal = user.dailyStepGoal
     let singleUserData = this.data.filter(user => {
       return user.userID === userId;
@@ -52,7 +52,7 @@ class Activity {
     return singleDay[0].numSteps > userStepGoal
   }
   returnAllDaysAUserReachedTheirStepGoal(userId) {
-    let user = this.user.userData
+    let user = this.user.userData[userId-1]
     let userStepGoal = user.dailyStepGoal
     let singleUserData = this.data.filter(user => {
       return user.userID === userId;
