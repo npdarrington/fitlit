@@ -7,6 +7,8 @@
 :root {
   --body-bg-color-top: #87CEFA;
   --body-bg-color: #fff;
+  --link-hover-color: #296E85;
+  --date-picker-border: #1E5162;
 }
 
 body {
@@ -22,4 +24,53 @@ body {
 
 #container {
   padding: 20px 50px;
+}
+
+#nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+#nav a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  color: #fff;
+}
+
+#nav a:hover {
+  transform: scale(1.2);
+  transition: all 0.25s;
+  border-bottom: 1px solid;
+  color: var(--link-hover-color);
+}
+
+.nav-left {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 40vw;
+}
+
+.user-name {
+  margin-right: 20px;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  min-width: 40vw;
+}
+
+.date-picker {
+  border-radius: 15px;
+  background-color: rgba(100, 100, 100, 0.3);
+  color: white;
+  border: 1px solid var(--date-picker-border);
+  width: 8vw;
+}
+
+.user-settings, .user-notifications, .user.small-profile {
+  margin: 0 8px;
 }
