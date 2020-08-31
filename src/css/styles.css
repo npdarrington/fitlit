@@ -87,6 +87,8 @@ body {
   margin: 40px 0;
 }
 
+/* user profile */
+
 .user-profile {
   display: flex;
   flex-direction: column;
@@ -97,6 +99,8 @@ body {
 .user-profile-name {
   margin-top: 10px;
 }
+
+/* user graphs */
 
 .user-graphs {
   display: flex;
@@ -111,4 +115,13 @@ body {
   background-color: lightgray;
   border-radius: 10px;
   box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
+}
+
+/* hotlinks */
+.hotlinks-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  margin: 60px 0;
 }
