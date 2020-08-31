@@ -33,7 +33,7 @@ const getCurrentUser = () => {
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
-const activity = new Activity(activityData, getCurrentUser())
+const activity = new Activity(activityData, allUsers.returnUserData(1))
 
 const populateUserData = currentUser => {
   userTitle.innerText = currentUser.getUserName();
@@ -96,7 +96,7 @@ const getUserAllTimeSleepData = () => {
 const getDailyActivityData = () =>{
   dailyStepCount.innerText = `${activity.data[indexOfUser - 1].numSteps} steps `
   dailyMinutesActive.innerText = `${activity.data[indexOfUser - 1].minutesActive} minutes active `
-  dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(indexOfUser, '2019/06/30')} miles walked`
+  dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(currentUser, '2019/06/30')} miles walked`
 }
 const generateLeaderboard = (activityForLeaderBoard, date) =>{
   let singleDay = activity.data.filter(user => {

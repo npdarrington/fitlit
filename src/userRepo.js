@@ -4,7 +4,7 @@ class UserRepo {
   }
 
   returnUserData(number) {
-    return this.userData.find(user => user.id === number);
+    return this.userData.filter(user => user.id === number)[0]
   }
 
   returnAverageStepGoalAllUsers() {
