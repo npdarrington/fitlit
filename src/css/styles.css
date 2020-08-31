@@ -9,6 +9,7 @@
   --body-bg-color: #fff;
   --link-hover-color: #296E85;
   --date-picker-border: #1E5162;
+  --box-shadow-large: 6px 6px 2px 1px rgba(0, 0, 0, .2);
 }
 
 body {
@@ -99,7 +100,7 @@ body {
 }
 
 .user-profile img {
-  width: 175px;
+  width: 150px;
 }
 
 .user-profile-name {
@@ -129,11 +130,11 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 10px 30px 5px 10px;
-  margin: 45px 0;
+  margin: 10px 0;
 }
 
 .hotlinks-row img {
-  width: 60px;
+  width: 50px;
   margin-bottom: 10px;
 }
 
@@ -142,6 +143,15 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hotlink-items:hover {
+  background-color: var(--body-bg-color-top);
+  transform: scale(1.2);
+  transition: all 0.25s;
+  box-shadow: 0 0 6px rgba(0, 0, 0, .3);
 }
 
 /* user challenge board */
