@@ -125,3 +125,32 @@ body {
   padding: 10px 40px;
   margin: 60px 0;
 }
+
+/* user challenge board */
+.user-challenge-board {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .3);
+  border-radius: 10px;
+}
+
+.display-friends-results {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+}
+
+.display-friends-results > thead {
+  display: inline-flex;
+  justify-content: space-around;
+  background-color: lightgray;
+  padding: 10px 0;
+}
+
+.display-friends-results > tbody > tr {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid black;
+  padding: 10px 0;
+}
