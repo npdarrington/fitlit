@@ -98,3 +98,17 @@ body {
   margin-top: 10px;
 }
 
+.user-graphs {
+  display: flex;
+  justify-content: space-evenly;
+  grid-area: 0 / 1;
+}
+
+.hydration-stats, .sleep-stats, .activity-stats {
+  margin: 0 20px;
+  height: 200px;
+  width: 33%;
+  background-color: lightgray;
+  border-radius: 10px;
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
+}
