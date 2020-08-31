@@ -23,7 +23,7 @@ body {
 }
 
 #container {
-  padding: 20px 50px;
+  padding: 20px 50px 0 20px;
 }
 
 /* header */
@@ -65,6 +65,10 @@ body {
   min-width: 40vw;
 }
 
+.nav-right img {
+  width: 20px;
+}
+
 .date-picker {
   border-radius: 15px;
   background-color: rgba(100, 100, 100, 0.3);
@@ -94,6 +98,10 @@ body {
   grid-area: 0 / 0;
 }
 
+.user-profile img {
+  width: 175px;
+}
+
 .user-profile-name {
   margin-top: 10px;
 }
@@ -120,8 +128,20 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 50px;
-  margin: 60px 0;
+  padding: 10px 30px 5px 10px;
+  margin: 45px 0;
+}
+
+.hotlinks-row img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.hotlink-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* user challenge board */
