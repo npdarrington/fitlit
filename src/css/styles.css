@@ -26,6 +26,8 @@ body {
   padding: 20px 50px;
 }
 
+/* header */
+
 #nav {
   display: flex;
   justify-content: space-between;
@@ -73,4 +75,14 @@ body {
 
 .user-settings, .user-notifications, .user.small-profile {
   margin: 0 8px;
+}
+
+/* main content */
+#main {
+  display:grid;
+  grid-template-rows: 20% 80%;
+  grid-template-columns: 20% 80%;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 40px 0;
 }
