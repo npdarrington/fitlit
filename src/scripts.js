@@ -36,6 +36,8 @@ const displayUserProfile = currentUser => {
     <h5>Email: ${currentUser.userData.email}</h5>
     <h5>Friends: ${currentUser.userData.friends}</h5>
     <h5>Stride Length: ${currentUser.userData.strideLength}</h5>
+    <h5>Your Daily Step Goal: ${currentUser.userData.dailyStepGoal}</h5>
+    <h5>All Users Daily Step Goal: ${allUsers.returnAverageStepGoalAllUsers()}</h5>
   `;
   userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
 }
