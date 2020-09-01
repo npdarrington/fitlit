@@ -58,7 +58,7 @@ const activity = new Activity(activityData,getCurrentUser())
 // }
 
 const getUserWaterDrankForTheWeek = () => {
-  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id,'2019/06/15');
+  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/06/15');
   displayHydrationGraph(UserHydration);
 }
 
@@ -77,7 +77,11 @@ const getUserWaterDrankForTheWeek = () => {
 // }
 
 const getUserWeeklySleepQuality = () => {
-  const sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','sleepQuality');
+  let sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'sleepQuality');
+  const sleepHoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'hoursSlept');
+  sleepQualityData.forEach((user, index) => {
+    user.hoursSlept = sleepHoursSleptData[index].hoursSlept;
+  });
   let changeChallengeBoardTitle = document.querySelector('.challenge-board-title');
   changeChallengeBoardTitle.innerText = 'Weekly Sleep Stats';
   playWithTheTable(sleepQualityData);
@@ -201,22 +205,21 @@ const getUserWeeklySleepQuality = () => {
 // }
 
 const playWithTheTable = allStats => {
+  console.log(allStats);
   let displayFriendsResultsHead = document.querySelector('.display-friends-results > thead');
   let displayFriendsResultsBody = document.querySelector('.display-friends-results > tbody');
   let displayTableHead = `
-    <tr><th>Column1</th></tr>
-    <tr><th>Column2</th></tr>
-    <tr><th>${'Date'}</th></tr>
-    <tr><th>${'Sleep Quality'}</th></tr>
+    <tr><th>Date</th></tr>
+    <tr><th>Hours Slept</th></tr>
+    <tr><th>Sleep Quality</th></tr>
   `;
   displayFriendsResultsHead.insertAdjacentHTML('afterbegin', displayTableHead);
   allStats.forEach(stat => {
     let displayTableBody = `
       <tr>
-        <td>Row 1 Column 1</td>
-        <td>Row 1 Column 2</td>
         <td>${stat.date}</td>
-        <td>${stat.sleepQuality}</td>
+        <td>${stat.hoursSlept} Hours Slept</td>
+        <td>${stat.sleepQuality} Sleep Quality</td>
       </tr>`;
     displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
   });
@@ -227,16 +230,30 @@ const displayHydrationGraph = (hydrationStats) => {
   let weeklyNumOunces = hydrationStats.map(cell => {
     return cell.numOunces;
   });
-  let myChart = new Chart(hydrationGraph, {
+  var myChart = new Chart(hydrationGraph, {
     type: 'bar',
     data: {
       labels: weeklyDates,
       datasets: [{
-        label: 'Number of Ounces Consumed',
+        label: 'Weekly Hydration Data',
         data: weeklyNumOunces,
-        backgroundColor: 'rgba(214, 214, 214, 0.6)',
-        borderColor: 'rgba(105, 175, 221, 1)',
-        borderWidth: 3
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
       }]
     },
     options: {
