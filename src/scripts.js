@@ -42,6 +42,12 @@ const displayUserDailyHydration = () => {
     <h3>Today's Hydration: ${hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id, '2019/09/22')}</h3>
   `;
   userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
+  getUserWaterDrankForTheWeek();
+}
+
+const getUserWaterDrankForTheWeek = () => {
+  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/09/22');
+  displayHydrationGraph(UserHydration);
 }
 
 // const getUserStepGoal = currentUser => {
@@ -55,11 +61,6 @@ const displayUserDailyHydration = () => {
 // const getUserWaterDrankToday = () => {
 //   waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id,'2019/06/15');
 // }
-
-const getUserWaterDrankForTheWeek = () => {
-  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/06/15');
-  displayHydrationGraph(UserHydration);
-}
 
 // const getUserDailySleepData = () => {
 //   dailyHoursSlept.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','hoursSlept');
@@ -285,6 +286,5 @@ window.onload = () => {
   // getWeeklyOverview()
   // createFriendsSection()
   // displayHydrationGraph();
-  getUserWaterDrankForTheWeek();
   getUserWeeklySleepQuality();
 };
