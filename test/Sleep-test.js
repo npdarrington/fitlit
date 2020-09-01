@@ -12,6 +12,10 @@ describe('Sleep', () => {
   it('Should get a user\'s verage number of hours slept per day', () => {
     expect(sleep.getUserAverageSleptHoursPerDay(1)).to.equal(7.34);
   });
+  it('Should Not get a user\'s verage number of hours slept per day given an invalid user', () => {
+    expect(sleep.getUserAverageSleptHoursPerDay(98)).to.equal(undefined);
+  });
+
 
   it('Should should show a user their average sleep quality per day over all time', () => {
     expect(sleep.getUserAverageSleepQualityAllTime(1)).to.equal(2.7);
@@ -19,6 +23,9 @@ describe('Sleep', () => {
 
   it('Should show a user how many hours they slept for a specific date', () => {
     expect(sleep.getUserDailySleepStats(1, '2019/06/29', 'hoursSlept')).to.equal(5.3);
+  });
+  it('Should Not show daily sleep stats given an invalid property', () => {
+    expect(sleep.getUserDailySleepStats(1, '2019/06/29', 'hours')).to.equal(undefined);
   });
 
   it('Should show a user their sleep quality for a specific date', () => {
@@ -37,6 +44,9 @@ describe('Sleep', () => {
         { date: '2019/06/23', hoursSlept: 7.8 }
       ]
     );
+  });
+  it('Should Not show a user their sleep hours each day over 7 days given an invalid user', () => {
+    expect(sleep.getUserWeeklySleepStats(98, '2019/06/23', 'hoursSlept')).to.deep.equal(undefined);
   });
 
   it('Should show a user their sleep quality each day over 7 days', () => {
