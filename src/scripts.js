@@ -1,7 +1,9 @@
 let challengeBoardTitle = document.querySelector('.challenge-board-title');
 let displayFriendsResultsHead = document.querySelector('.display-friends-results > thead');
 let displayFriendsResultsBody = document.querySelector('.display-friends-results > tbody');
+let userProfileSection = document.querySelector('.user-profile');
 let hydrationGraph = document.querySelector('#hydration-stats');
+let userHotLinks = document.querySelector('.user-hotlinks');
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
@@ -13,6 +15,10 @@ const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
 const activity = new Activity(activityData,getCurrentUser())
 
+function changeUserDataDisplayHandler(event) {
+  if (event.target.closest('.profile')) displayUserProfile(currentUser);
+}
+
 // const populateUserData = currentUser => {
 //   userTitle.innerText = currentUser.getUserName();
 //   userName.innerText = currentUser.userData.name;
@@ -21,6 +27,18 @@ const activity = new Activity(activityData,getCurrentUser())
 //   userFriends.innerText = currentUser.userData.friends;
 //   userStrideLength.innerText = currentUser.userData.strideLength;
 // }
+
+const displayUserProfile = currentUser => {
+  let buildUserData = `
+    <h3>${currentUser.getUserName()}'s Profile</h3>
+    <h5>Name: ${currentUser.userData.name}</h5>
+    <h5>Address: ${currentUser.userData.address}</h5>
+    <h5>Email: ${currentUser.userData.email}</h5>
+    <h5>Friends: ${currentUser.userData.friends}</h5>
+    <h5>Stride Length: ${currentUser.userData.strideLength}</h5>
+  `;
+  userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
+}
 
 // const getUserStepGoal = currentUser => {
 //   userStepGoal.innerText = currentUser.userData.dailyStepGoal;
@@ -241,6 +259,8 @@ const displayHydrationGraph = (hydrationStats) => {
   });
   return myChart;
 }
+
+userHotLinks.addEventListener('click', changeUserDataDisplayHandler);
 
 window.onload = () => {
   getCurrentUser(userData);
