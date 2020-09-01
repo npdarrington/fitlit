@@ -17,18 +17,11 @@ const activity = new Activity(activityData,getCurrentUser())
 
 function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) displayUserProfile(currentUser);
+  if (event.target.closest('.hydration')) displayUserDailyHydration();
 }
 
-// const populateUserData = currentUser => {
-//   userTitle.innerText = currentUser.getUserName();
-//   userName.innerText = currentUser.userData.name;
-//   userAddress.innerText = currentUser.userData.address;
-//   userEmail.innerText = currentUser.userData.email;
-//   userFriends.innerText = currentUser.userData.friends;
-//   userStrideLength.innerText = currentUser.userData.strideLength;
-// }
-
 const displayUserProfile = currentUser => {
+  userProfileSection.innerHTML = '';
   let buildUserData = `
     <h3>${currentUser.getUserName()}'s Profile</h3>
     <h5>Name: ${currentUser.userData.name}</h5>
@@ -38,6 +31,15 @@ const displayUserProfile = currentUser => {
     <h5>Stride Length: ${currentUser.userData.strideLength}</h5>
     <h5>Your Daily Step Goal: ${currentUser.userData.dailyStepGoal}</h5>
     <h5>All Users Daily Step Goal: ${allUsers.returnAverageStepGoalAllUsers()}</h5>
+  `;
+  userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
+}
+
+const displayUserDailyHydration = () => {
+  userProfileSection.innerHTML = '';
+  let buildUserData = `
+    <h3>${currentUser.getUserName()}'s Daily Hydration</h3>
+    <h3>Today's Hydration: ${hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id, '2019/09/22')}</h3>
   `;
   userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
 }
