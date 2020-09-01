@@ -18,6 +18,7 @@ const activity = new Activity(activityData,getCurrentUser())
 function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) displayUserProfile(currentUser);
   if (event.target.closest('.hydration')) displayUserDailyHydration();
+  if (event.target.closest('.sleep')) displayUserDailySleep();
 }
 
 const displayUserProfile = currentUser => {
@@ -50,6 +51,30 @@ const getUserWaterDrankForTheWeek = () => {
   displayHydrationGraph(UserHydration);
 }
 
+const displayUserDailySleep = () => {
+  userProfileSection.innerHTML = '';
+  let buildUserData = `
+    <h3>${currentUser.getUserName()}'s Daily Sleep Stats</h3>
+    <h5>Today's Hours Slept: ${sleep.getUserDailySleepStats(currentUser.userData.id, '2019/09/22', 'hoursSlept')}</h5>
+    <h5>Today's Sleep Quality: ${sleep.getUserDailySleepStats(currentUser.userData.id, '2019/09/22', 'sleepQuality')}</h5>
+    <br><br>
+    <h3>${currentUser.getUserName()}'s All-Time Sleep Stats</h3>
+    <h5>All Time Avg Hours Slept: ${sleep.getUserAverageSleptHoursPerDay(currentUser.userData.id)}</h5>
+    <h5>All Time Avg Sleep Quality: ${sleep.getUserAverageSleepQualityAllTime(currentUser.userData.id)}</h5>
+  `;
+  userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
+}
+
+const getUserWeeklySleepQuality = () => {
+  let sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'sleepQuality');
+  const sleepHoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'hoursSlept');
+  sleepQualityData.forEach((user, index) => {
+    user.hoursSlept = sleepHoursSleptData[index].hoursSlept;
+  });
+  challengeBoardTitle.innerText = 'Weekly Sleep Stats';
+  playWithTheTable(sleepQualityData);
+}
+
 // const getUserStepGoal = currentUser => {
 //   userStepGoal.innerText = currentUser.userData.dailyStepGoal;
 // }
@@ -75,16 +100,6 @@ const getUserWaterDrankForTheWeek = () => {
 //     weeklyHoursSlept.appendChild(hoursSleptDiv);
 //   });
 // }
-
-const getUserWeeklySleepQuality = () => {
-  let sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'sleepQuality');
-  const sleepHoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'hoursSlept');
-  sleepQualityData.forEach((user, index) => {
-    user.hoursSlept = sleepHoursSleptData[index].hoursSlept;
-  });
-  challengeBoardTitle.innerText = 'Weekly Sleep Stats';
-  playWithTheTable(sleepQualityData);
-}
 
 // const getUserAllTimeSleepData = () => {
 //   allTimeHoursSlept.innerText = sleep.getUserAverageSleptHoursPerDay(currentUser.userData.id);
