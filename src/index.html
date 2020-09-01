@@ -35,7 +35,7 @@
             <h3 class="user-profile-name">Team Member!</h3>
           </section>
           <section class="user-graphs">
-            <article class="hydration-stats"></article>
+            <canvas id="hydration-stats" class="hydration-stats" width="600px" height="150px"></article>
           </section>
           <section class="user-hotlinks">
             <section class="hotlinks-row">
@@ -69,11 +69,24 @@
               </article>
             </section>
           </section>
-          <section class="user-challenge-board">
-            <table class="display-friends-results">
-              <thead></thead>
-              <tbody></tbody>
-            </table>
+          <section class="display-table">
+            <section class="display-content-top">
+              <article class="display-content-left">
+                <h3 class="challenge-board-title" style="padding: 20px; margin: 15px 0"></h3>
+              </article>
+              <article class="display-content-right">
+                <button>Sleep Quality</button>
+                <button>Hours Slept</button>
+                <button>Average Hours Slept</button>
+                <button>Average Sleep Quality</button>
+              </article>
+            </section>
+            <section class="user-challenge-board">
+              <table class="display-friends-results">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </section>
           </section>
         </main>
       </section>
@@ -87,6 +100,7 @@
     <script src="./Hydration.js"></script>
     <script src="./Sleep.js"></script>
     <script src = "./Activity.js"></script>
+    <script src="../node_modules/chart.js/dist/Chart.js"></script>
 
 
     <script type="text/javascript" src="../data/users.js"></script>
