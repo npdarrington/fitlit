@@ -59,6 +59,7 @@ const activity = new Activity(activityData,getCurrentUser())
 
 const getUserWaterDrankForTheWeek = () => {
   var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id,'2019/06/15');
+  displayHydrationGraph(UserHydration);
 }
 
 // const getUserDailySleepData = () => {
@@ -219,6 +220,36 @@ const playWithTheTable = allStats => {
       </tr>`;
     displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
   });
+}
+
+const displayHydrationGraph = (hydrationStats) => {
+  let weeklyDates = hydrationStats.map(cell => cell.date);
+  let weeklyNumOunces = hydrationStats.map(cell => {
+    return cell.numOunces;
+  });
+  let myChart = new Chart(hydrationGraph, {
+    type: 'bar',
+    data: {
+      labels: weeklyDates,
+      datasets: [{
+        label: 'Number of Ounces Consumed',
+        data: weeklyNumOunces,
+        backgroundColor: 'rgba(214, 214, 214, 0.6)',
+        borderColor: 'rgba(105, 175, 221, 1)',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+  return myChart;
 }
 
 window.onload = () => {
