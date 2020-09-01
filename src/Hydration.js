@@ -33,7 +33,7 @@ class Hydration {
     const UsernumOunces = singleUserData.map(user => {
       return { date: user.date, numOunces: user.numOunces };
     });
-    return UsernumOunces.splice(indexOfstartDateObject, 7).reverse();
+    return UsernumOunces.splice(indexOfstartDateObject - 6, 7).reverse();
   }
 }
 
