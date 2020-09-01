@@ -8,6 +8,9 @@ class Hydration {
   }
 	
   returnAverergeUserFluidOuncesConsumedAllTime(userId) {
+    if (this.getCurrentUser(userId).length === 0 ) {
+      return undefined
+    }
     const singleUserData = this.getCurrentUser(userId);
     const totalOuncesDrank = singleUserData.reduce((startingValue, user)=> {
       return startingValue += user.numOunces;
@@ -17,6 +20,9 @@ class Hydration {
 
   returnFluidOuncesForSpecificDay(userId, date) {
     const singleUserData = this.getCurrentUser(userId);
+    if(singleUserData.length === 0){
+      return undefined
+    }
     return singleUserData.find(user => user.date === date).numOunces;
   }
 

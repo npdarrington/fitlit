@@ -9,6 +9,9 @@ class Sleep {
 
   getUserAverageSleptHoursPerDay(userId) {
     const singleUserData = this.getCurrentUser(userId);
+    if(singleUserData.length === 0){
+      return undefined
+    }
     const userSleepPerDayAverage = singleUserData.reduce((total, user) => {
       return total += user.hoursSlept;
     }, 0);
@@ -19,6 +22,9 @@ class Sleep {
 
   getUserAverageSleepQualityAllTime(userId) {
     const singleUserData = this.getCurrentUser(userId);
+    if(singleUserData.length === 0){
+      return undefined
+    }
     const userSleepQualityAverage =  singleUserData.reduce((total, user) => {
       return total += user.sleepQuality;
     }, 0);
@@ -27,11 +33,17 @@ class Sleep {
 
   getUserDailySleepStats(userId, date, prop) {
     const singleUserData = this.getCurrentUser(userId);
+    if (singleUserData.length === 0 || singleUserData[0][prop] === undefined) {
+      return undefined
+    }
     return singleUserData.find(user => user.date === date)[prop];
   }
 
   getUserWeeklySleepStats(userId, startDate, prop) {
     const singleUserData = this.getCurrentUser(userId);
+    if (singleUserData.length === 0) {
+      return undefined
+    }
     const startDateObject = singleUserData.find(user => user.date === startDate);
     const indexOfStartDateObject = singleUserData.indexOf(startDateObject);
     const getUserSevenDaySleepData = singleUserData.map(user => {

@@ -12,9 +12,15 @@ describe('Hydration', () =>{
   it('Should return average fluid ounces consumed per day for all time', () => {
     expect(hydration.returnAverergeUserFluidOuncesConsumedAllTime(1)).to.equal(59);
   });
+  it('Should Not return average fluid ounces consumed per day for all time given invalid user', () => {
+    expect(hydration.returnAverergeUserFluidOuncesConsumedAllTime(98)).to.equal(undefined);
+  });
   
   it('should return how many fluid ounces a user consumed for a specific day ', () => {
     expect(hydration.returnFluidOuncesForSpecificDay(18, "2019/06/17")).to.equal(76);
+  });
+  it('should Not return how many fluid ounces a user consumed for a specific day given an invalid user ', () => {
+    expect(hydration.returnFluidOuncesForSpecificDay(98, "2020/06/17")).to.equal(undefined);
   });
 
   it('Should return fluid ounces of water consumed each day over the course of a week', () => {
