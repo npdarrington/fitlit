@@ -26,6 +26,10 @@ describe('UserRepo', () => {
       }
     );
   });
+  it('Should Not return a user’s ID, given invalid user data', () => {
+    expect (userRepo.returnUserData(98)).to.deep.equal(undefined
+    );
+  });
 
   it('should be able to return the average step goal amongst all users', () => {
     expect(userRepo.returnAverageStepGoalAllUsers()).to.deep.equal(6400);
