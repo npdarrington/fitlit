@@ -24,6 +24,7 @@ let stepsWeeklyOverview = document.querySelector('.steps-weekly-overview')
 let minutesActiveWeeklyOverview = document.querySelector('.minutes-active-weekly-overview')
 let flightsOfStairsWeeklyOverview = document.querySelector('.flights-of-stairs-weekly-overview')
 let friendLeaderBoard = document.querySelector('.friend-stepcount-leaderboard')
+let hydrationGraph = document.querySelector('#hydration-stats');
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
@@ -33,179 +34,212 @@ const getCurrentUser = () => {
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
-const activity = new Activity(activityData, allUsers.returnUserData(1))
+const activity = new Activity(activityData,getCurrentUser())
 
-const populateUserData = currentUser => {
-  userTitle.innerText = currentUser.getUserName();
-  userName.innerText = currentUser.userData.name;
-  userAddress.innerText = currentUser.userData.address;
-  userEmail.innerText = currentUser.userData.email;
-  userFriends.innerText = currentUser.userData.friends;
-  userStrideLength.innerText = currentUser.userData.strideLength;
-}
+// const populateUserData = currentUser => {
+//   userTitle.innerText = currentUser.getUserName();
+//   userName.innerText = currentUser.userData.name;
+//   userAddress.innerText = currentUser.userData.address;
+//   userEmail.innerText = currentUser.userData.email;
+//   userFriends.innerText = currentUser.userData.friends;
+//   userStrideLength.innerText = currentUser.userData.strideLength;
+// }
 
-const getUserStepGoal = currentUser => {
-  userStepGoal.innerText = currentUser.userData.dailyStepGoal;
-}
+// const getUserStepGoal = currentUser => {
+//   userStepGoal.innerText = currentUser.userData.dailyStepGoal;
+// }
 
-const getAllUsersStepGoal = () => {
-  allUsersStepGoal.innerText = allUsers.returnAverageStepGoalAllUsers();
-}
+// const getAllUsersStepGoal = () => {
+//   allUsersStepGoal.innerText = allUsers.returnAverageStepGoalAllUsers();
+// }
 
-const getUserWaterDrankToday = () => {
-  waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id, '2019/06/15');
-}
+// const getUserWaterDrankToday = () => {
+//   waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id,'2019/06/15');
+// }
+
 const getUserWaterDrankForTheWeek = () => {
-  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/06/15');
-
-  UserHydration.forEach( (day) => {
-    var WaterIntakeDiv = document.createElement(("div"));
-    WaterIntakeDiv.innerText = `${day.date} : ${day.numOunces} ounces`;
-    weeklyWaterIntake.appendChild(WaterIntakeDiv);
-  });
+  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id,'2019/06/15');
 }
 
-const getUserDailySleepData = () => {
-  dailyHoursSlept.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30', 'hoursSlept');
-  dailyQualitySleep.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30', 'sleepQuality');
-}
+// const getUserDailySleepData = () => {
+//   dailyHoursSlept.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','hoursSlept');
+//   dailyQualitySleep.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','sleepQuality');
+// }
 
-const getUserWeeklyHoursSlept = () => {
-  let hoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'hoursSlept');
-  hoursSleptData.forEach(day => {
-    var hoursSleptDiv = document.createElement('div');
-    hoursSleptDiv.innerText = `${day.date} : ${day.hoursSlept}`;
-    weeklyHoursSlept.appendChild(hoursSleptDiv);
-  });
-}
+// const getUserWeeklyHoursSlept = () => {
+//   let hoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','hoursSlept');
+//   hoursSleptData.forEach(day => {
+//     var hoursSleptDiv = document.createElement('div');
+//     hoursSleptDiv.innerText = `${day.date} : ${day.hoursSlept}`;
+//     weeklyHoursSlept.appendChild(hoursSleptDiv);
+//   });
+// }
 
 const getUserWeeklySleepQuality = () => {
-  let sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23', 'sleepQuality');
-  sleepQualityData.forEach(day => {
-    var sleepQualityDiv = document.createElement('div');
-    sleepQualityDiv.innerText = `${day.date} : ${day.sleepQuality}`;
-    weeklyQualitySleep.appendChild(sleepQualityDiv);
+  const sleepQualityData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','sleepQuality');
+  let changeChallengeBoardTitle = document.querySelector('.challenge-board-title');
+  changeChallengeBoardTitle.innerText = 'Weekly Sleep Stats';
+  playWithTheTable(sleepQualityData);
+}
+
+// const getUserAllTimeSleepData = () => {
+//   allTimeHoursSlept.innerText = sleep.getUserAverageSleptHoursPerDay(currentUser.userData.id);
+//   allTimeQualitySleep.innerText = sleep.getUserAverageSleepQualityAllTime(currentUser.userData.id);
+// }
+
+// const getDailyActivityData = () =>{
+//   dailyStepCount.innerText = `${activity.data[indexOfUser-1].numSteps} steps `
+//   dailyMinutesActive.innerText = `${activity.data[indexOfUser-1].minutesActive} minutes active `
+//   dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(indexOfUser,'2019/06/30')} miles walked`
+// }
+// const generateLeaderboard = (activityForLeaderBoard,date) =>{
+//   let singleDay = activity.data.filter(user => {
+//     return user.date === date;
+//   });
+//   let sortedArray = singleDay.sort((user,nextUser)=>{
+//     return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
+//   })
+//   return sortedArray
+// }
+// const addDailyStepleaderBoard = () =>{
+// let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
+// sortedArray.forEach((user,i) =>{
+//   if(i<=5){
+//     let userSection = document.createElement('div');
+//     userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps}`;
+//     dailyStepsLeaderBoard.appendChild(userSection)
+//   }
+// })
+// }
+// const addDailyminutesActiveBoard = () =>{
+//   let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
+// sortedArray.forEach((user,i) =>{
+//   if(i<5){
+//     let userSection = document.createElement('div');
+//     userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive}`;
+//     dailyminutesActiveLeaderBoard.appendChild(userSection)
+//   }
+// })
+// }
+// const addDailyStairClimbedBoard = () =>{
+//   let sortedArray = generateLeaderboard('flightsOfStairs',"2019/06/28")
+// sortedArray.forEach((user,i) =>{
+//   if(i<=5){
+//     let userSection = document.createElement('div');
+//     userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.flightsOfStairs}`;
+//     dailyStairsClimbed.appendChild(userSection)
+//   }
+// })
+// }
+// const putWeeklyOverViewOnDom = (stepCountOverView,activity,domElement) => {
+//   stepCountOverView.forEach(date =>{
+//     let userSection = document.createElement('div');
+//     let sufix;
+//     if(activity === 'numSteps'){
+//       sufix = 'Steps'
+//     }
+//     else if(activity === 'minutesActive'){
+//       sufix = 'Minutes Active'
+
+//     }
+//     else{
+//       sufix = 'Stairs'
+//     }
+//     userSection.innerText = `${date.date} : ${date[activity]} ${sufix}`;
+//     domElement.appendChild(userSection)
+//   })
+// }
+// const getWeeklyOverview = () => {
+//   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'numSteps'),'numSteps',stepsWeeklyOverview)
+//   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'minutesActive'),'minutesActive',minutesActiveWeeklyOverview)
+//   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'flightsOfStairs'),'flightsOfStairs',flightsOfStairsWeeklyOverview)
+
+//   }
+
+// const createFriendsSection = () => {
+//   let friends = allUsers.userData.filter(user => {
+//       return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
+//     })
+//   let friendsWeeklySteps = findFriendsWeeklySteps(friends)
+//   var stepCounts =  findUserStepCounts(friendsWeeklySteps)
+
+//   var sortedSteps = stepCounts.sort((firstValue,secondValue) => {
+//   return secondValue.steps - firstValue.steps
+//   })
+//   addFriendsToHtml(sortedSteps)
+// }
+// findFriendsWeeklySteps = (friends) =>{
+//   return friends.map(user => {
+//     return { 
+//       id : user.id,
+//       date : activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
+//     }
+//   })
+// }
+// addFriendsToHtml = (sortedSteps) =>{
+//   sortedSteps.forEach(user =>{
+//     var friendSection = document.createElement('div')
+//     if(user.id === indexOfUser ){
+//       friendSection.innerText = `You : ${user.steps} steps`
+
+//     }else{
+//     friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
+//   }
+//     friendLeaderBoard.appendChild(friendSection)
+//   })
+// }
+// findUserStepCounts = (friendsWeeklySteps) => {
+//   return friendsWeeklySteps.map(userSteps =>{
+//     var obj = {}
+//     obj.id = userSteps.id
+//     obj.steps =  userSteps.date.reduce((startingValue,date) =>{
+//       return startingValue += date.numSteps
+//     },0)
+//     return obj
+//   })
+// }
+
+const playWithTheTable = allStats => {
+  let displayFriendsResultsHead = document.querySelector('.display-friends-results > thead');
+  let displayFriendsResultsBody = document.querySelector('.display-friends-results > tbody');
+  let displayTableHead = `
+    <tr><th>Column1</th></tr>
+    <tr><th>Column2</th></tr>
+    <tr><th>${'Date'}</th></tr>
+    <tr><th>${'Sleep Quality'}</th></tr>
+  `;
+  displayFriendsResultsHead.insertAdjacentHTML('afterbegin', displayTableHead);
+  allStats.forEach(stat => {
+    let displayTableBody = `
+      <tr>
+        <td>Row 1 Column 1</td>
+        <td>Row 1 Column 2</td>
+        <td>${stat.date}</td>
+        <td>${stat.sleepQuality}</td>
+      </tr>`;
+    displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
   });
-}
-
-const getUserAllTimeSleepData = () => {
-  allTimeHoursSlept.innerText = sleep.getUserAverageSleptHoursPerDay(currentUser.userData.id);
-  allTimeQualitySleep.innerText = sleep.getUserAverageSleepQualityAllTime(currentUser.userData.id);
-}
-
-const getDailyActivityData = () =>{
-  dailyStepCount.innerText = `${activity.data[indexOfUser - 1].numSteps} steps `
-  dailyMinutesActive.innerText = `${activity.data[indexOfUser - 1].minutesActive} minutes active `
-  dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(currentUser, '2019/06/30')} miles walked`
-}
-const generateLeaderboard = (activityForLeaderBoard, date) =>{
-  let singleDay = activity.data.filter(user => {
-    return user.date === date;
-  });
-  let sortedArray = singleDay.sort((user, nextUser)=>{
-    return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
-  })
-  return sortedArray
-}
-
-const addDailyActivityLeaderboard = (activity) =>{
-  let sortedArray = generateLeaderboard(activity, "2019/06/28")
-  sortedArray.forEach((user, i) =>{
-    let section;
-    if (activity === 'numSteps') {
-      section = dailyStepsLeaderBoard
-    } else if (activity === 'minutesActive') {
-      section = dailyminutesActiveLeaderBoard
-    } else {
-      section = dailyStairsClimbed
-    }
-    if (i <= 5) {
-      let userSection = document.createElement('div');
-      userSection.innerText = `${i + 1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user[activity]}`;
-      section.appendChild(userSection)
-    }
-  })
-}
-const putWeeklyOverViewOnDom = (stepCountOverView, activity, domElement) => {
-  stepCountOverView.forEach(date =>{
-    let userSection = document.createElement('div');
-    let sufix;
-    if (activity === 'numSteps') {
-      sufix = 'Steps'
-    } else if (activity === 'minutesActive') {
-      sufix = 'Minutes Active'
-    } else {
-      sufix = 'Stairs'
-    }
-    userSection.innerText = `${date.date} : ${date[activity]} ${sufix}`;
-    domElement.appendChild(userSection)
-  })
-}
-const getWeeklyOverview = () => {
-  putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'numSteps'), 'numSteps', stepsWeeklyOverview)
-  putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'minutesActive'), 'minutesActive', minutesActiveWeeklyOverview)
-  putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'flightsOfStairs'), 'flightsOfStairs', flightsOfStairsWeeklyOverview)
-}
-const getDailyLeaderBoards = () =>{
-  addDailyActivityLeaderboard('numSteps')
-  addDailyActivityLeaderboard('minutesActive')
-  addDailyActivityLeaderboard('flightsOfStairs')
-}
-const createFriendsSection = () => {
-  let friends = allUsers.userData.filter(user => {
-    return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
-  })
-  let friendsWeeklySteps = findFriendsWeeklySteps(friends)
-  var stepCounts =  findUserStepCounts(friendsWeeklySteps)
-
-  var sortedSteps = stepCounts.sort((firstValue, secondValue) => {
-    return secondValue.steps - firstValue.steps
-  })
-  addFriendsToHtml(sortedSteps)
-}
-let findFriendsWeeklySteps = (friends) =>{
-  return friends.map(user => {
-    return { 
-      id: user.id,
-      date: activity.returnActvityWeeklyOverview(user.id, "2019/06/28", 'numSteps')
-    }
-  })
-}
-let addFriendsToHtml = (sortedSteps) =>{
-  sortedSteps.forEach(user =>{
-    var friendSection = document.createElement('div')
-    if (user.id === indexOfUser ) {
-      friendSection.innerText = `You : ${user.steps} steps`
-    } else {
-      friendSection.innerText = `${allUsers.userData[user.id - 1].name}: ${user.steps} steps`
-    }
-    friendLeaderBoard.appendChild(friendSection)
-  })
-}
-let findUserStepCounts = (friendsWeeklySteps) => {
-  return friendsWeeklySteps.map(userSteps =>{
-    var obj = {}
-    obj.id = userSteps.id
-    obj.steps =  userSteps.date.reduce((startingValue, date) =>{
-      return startingValue += date.numSteps
-    }, 0)
-    return obj
-  })
 }
 
 window.onload = () => {
   getCurrentUser(userData);
-  populateUserData(currentUser);
-  getUserStepGoal(currentUser);
-  getAllUsersStepGoal();
-  getUserWaterDrankToday();
+  document.querySelector('.user-name').innerText = `Welcome back ${currentUser.getUserName()}`
+  // populateUserData(currentUser);
+  // getUserStepGoal(currentUser);
+  // getAllUsersStepGoal();
+  // getUserWaterDrankToday();
+  // getUserWaterDrankForTheWeek();
+  // getUserDailySleepData();
+  // getUserWeeklyHoursSlept();
+  // getUserWeeklySleepQuality();
+  // getUserAllTimeSleepData();
+  // getDailyActivityData()
+  // addDailyStepleaderBoard()
+  // addDailyminutesActiveBoard()
+  // addDailyStairClimbedBoard()
+  // getWeeklyOverview()
+  // createFriendsSection()
+  // displayHydrationGraph();
   getUserWaterDrankForTheWeek();
-  getUserDailySleepData();
-  getUserWeeklyHoursSlept();
   getUserWeeklySleepQuality();
-  getUserAllTimeSleepData();
-  getDailyActivityData()
-  getDailyLeaderBoards()
-  getWeeklyOverview()
-  createFriendsSection()
 };
