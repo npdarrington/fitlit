@@ -28,6 +28,10 @@ body {
 }
 
 /* header */
+.user-name-large {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
 
 #nav {
   display: flex;
@@ -116,13 +120,12 @@ body {
 .user-profile {
   display: flex;
   justify-content: center;
-  grid-area: 0 / 0;
+  margin-right: 10px;
 }
 
 .user-graphs {
   display: flex;
   justify-content: space-evenly;
-  grid-area: 0 / 1;
 }
 
 .hydration-stats {
