@@ -4,7 +4,6 @@ let displayFriendsResultsBody = document.querySelector('.display-friends-results
 let userProfileSection = document.querySelector('.user-profile');
 let hydrationGraph = document.querySelector('#hydration-stats');
 let userHotLinks = document.querySelector('.user-hotlinks');
-let graphArea = document.querySelector('.user-graphs')
 let bottomOfPage = document.querySelector('#user-bottom')
 let currentUser;
 let indexOfUser  = 1
@@ -18,9 +17,15 @@ const sleep = new Sleep(sleepData);
 const activity = new Activity(activityData,allUsers.returnUserData(indexOfUser))
 
 function changeUserDataDisplayHandler(event) {
-  if (event.target.closest('.profile')) displayUserProfile(currentUser);
-  if (event.target.closest('.hydration')) displayUserDailyHydration();
-  if (event.target.closest('.sleep')) displayAllUserSleepData();
+  if (event.target.closest('.profile')) {
+    displayUserProfile(currentUser)
+  }
+  if (event.target.closest('.hydration')) {
+    displayUserDailyHydration();
+  } 
+  if (event.target.closest('.sleep')) {
+    displayAllUserSleepData();
+  } 
   if (event.target.closest('.activity')) {
     getUserWeeklyActivity()
   }
@@ -254,7 +259,7 @@ const findUserStepCounts = (friendsWeeklySteps) => {
     obj.id = userSteps.id
     obj.steps =  userSteps.date.reduce((startingValue,date) =>{
       return startingValue += date.numSteps
-    },0)
+    }, 0)
     return obj
   })
 }
