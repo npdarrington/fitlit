@@ -13,7 +13,7 @@ const getCurrentUser = () => {
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
-const activity = new Activity(activityData,getCurrentUser())
+const activity = new Activity(activityData,allUsers.returnUserData(indexOfUser))
 
 function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) displayUserProfile(currentUser);
@@ -109,6 +109,7 @@ const getUserWeeklyActivity = () => {
     user.flightsOfStairs = flightsOfStairsWeely[index].flightsOfStairs;
   });
   displayActivityToTable(numStepsWeekly);
+  displayDailyUserActivity();
 }
 
 const displayActivityToTable = allStats => {
@@ -130,6 +131,17 @@ const displayActivityToTable = allStats => {
       </tr>`;
     displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
   });
+}
+
+const displayDailyUserActivity = () => {
+  userProfileSection.innerHTML = '';
+  let buildUserData = `
+    <h3>${currentUser.getUserName()}'s Daily Sleep Stats</h3>
+    <h5>Today's Number Of Steps: ${activity.returnNumOfStepsForGivenDay(currentUser.userData.id, '2019/09/22')}</h5>
+    <h5>Today's Minutes Active: ${activity.returnMinutesActiveForGivenDay(currentUser.userData.id, '2019/09/22')}</h5>
+    <h5>Today's Distance Walked: ${activity.returnMilesWalkedForGivenDay('2019/09/22')}</h5>
+  `;
+  userProfileSection.insertAdjacentHTML('afterbegin', buildUserData);
 }
 
 const clearTableData = () => {
