@@ -16,7 +16,7 @@ beforeEach(function() {
 describe('Activity', ()=>{
   it('Should, given a specific day return the miles a user has walked based on their number of steps', () => {
     console.log('user',activity.user)
-    expect(activity.returnMilesWalkedForGivenDay( 1 ,"2019/06/28")).to.equal(8.56)
+    expect(activity.returnMilesWalkedForGivenDay("2019/06/28")).to.equal(8.56)
   })
   it('Should return how many minutes were they active for a given day ',()=>{
     expect(activity.returnMinutesActiveForGivenDay(1,"2019/06/28")).to.equal(169)

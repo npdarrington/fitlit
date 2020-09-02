@@ -3,7 +3,7 @@ class Activity {
     this.data = ActivityTestData
     this.user = user
   }
-  returnMilesWalkedForGivenDay(Auser, date) {
+  returnMilesWalkedForGivenDay(date) {
     let currentUser = this.user
     console.log('algo',currentUser)
     let singleUserData = this.data.filter(user => {
