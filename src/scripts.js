@@ -329,21 +329,4 @@ userHotLinks.addEventListener('click', changeUserDataDisplayHandler);
 window.onload = () => {
   getCurrentUser(userData);
   document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
-  // populateUserData(currentUser);
-  // getUserStepGoal(currentUser);
-  // getAllUsersStepGoal();
-  // getUserWaterDrankToday();
-  // getUserWaterDrankForTheWeek();
-  // getUserDailySleepData();
-  // getUserWeeklyHoursSlept();
-  // getUserWeeklySleepQuality();
-  // getUserAllTimeSleepData();
-  // getDailyActivityData()
-  // addDailyStepleaderBoard()
-  // addDailyminutesActiveBoard()
-  // addDailyStairClimbedBoard()
-  // getWeeklyOverview()
-  // createFriendsSection()
-  // displayHydrationGraph();
-  getUserWeeklySleepQuality();
 };
