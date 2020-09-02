@@ -319,48 +319,52 @@ const generateLeaderboard = (activityForLeaderBoard,date) =>{
 
 //   }
 
-// const createFriendsSection = () => {
-//   let friends = allUsers.userData.filter(user => {
-//       return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
-//     })
-//   let friendsWeeklySteps = findFriendsWeeklySteps(friends)
-//   var stepCounts =  findUserStepCounts(friendsWeeklySteps)
+const createFriendsSection = () => {
+  let friends = allUsers.userData.filter(user => {
+      return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
+    })
+  let friendsWeeklySteps = findFriendsWeeklySteps(friends)
+  var stepCounts =  findUserStepCounts(friendsWeeklySteps)
 
-//   var sortedSteps = stepCounts.sort((firstValue,secondValue) => {
-//   return secondValue.steps - firstValue.steps
-//   })
-//   addFriendsToHtml(sortedSteps)
-// }
-// findFriendsWeeklySteps = (friends) =>{
-//   return friends.map(user => {
-//     return { 
-//       id : user.id,
-//       date : activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
-//     }
-//   })
-// }
-// addFriendsToHtml = (sortedSteps) =>{
-//   sortedSteps.forEach(user =>{
-//     var friendSection = document.createElement('div')
-//     if(user.id === indexOfUser ){
-//       friendSection.innerText = `You : ${user.steps} steps`
+  var sortedSteps = stepCounts.sort((firstValue,secondValue) => {
+  return secondValue.steps - firstValue.steps
+  })
+  addFriendsToHtml(sortedSteps)
+}
+findFriendsWeeklySteps = (friends) =>{
+  return friends.map(user => {
+    return { 
+      id : user.id,
+      date : activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
+    }
+  })
+}
+addFriendsToHtml = (sortedSteps) =>{
+  let competion = document.querySelector('.friend-competition')
+  sortedSteps.forEach(user =>{
+    var friendSection = document.createElement('div')
+    if(user.id === indexOfUser ){
+      friendSection.innerText = `You : ${user.steps} steps`
 
-//     }else{
-//     friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
-//   }
-//     friendLeaderBoard.appendChild(friendSection)
-//   })
-// }
-// findUserStepCounts = (friendsWeeklySteps) => {
-//   return friendsWeeklySteps.map(userSteps =>{
-//     var obj = {}
-//     obj.id = userSteps.id
-//     obj.steps =  userSteps.date.reduce((startingValue,date) =>{
-//       return startingValue += date.numSteps
-//     },0)
-//     return obj
-//   })
-// }
+    }else{
+    friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
+  }
+  competion.appendChild(friendSection)
+  })
+}
+findUserStepCounts = (friendsWeeklySteps) => {
+  return friendsWeeklySteps.map(userSteps =>{
+    var obj = {}
+    obj.id = userSteps.id
+    obj.steps =  userSteps.date.reduce((startingValue,date) =>{
+      return startingValue += date.numSteps
+    },0)
+    return obj
+  })
+}
+display= () =>{
+
+}
 
 const displayHydrationGraph = (hydrationStats) => {
  
@@ -415,6 +419,6 @@ userHotLinks.addEventListener('click', changeUserDataDisplayHandler);
 window.onload = () => {
   getCurrentUser(userData);
   getUserWaterDrankForTheWeek()
-
+  createFriendsSection()
   document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
 };
