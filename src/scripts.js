@@ -4,6 +4,8 @@ let displayFriendsResultsBody = document.querySelector('.display-friends-results
 let userProfileSection = document.querySelector('.user-profile');
 let hydrationGraph = document.querySelector('#hydration-stats');
 let userHotLinks = document.querySelector('.user-hotlinks');
+let graphArea = document.querySelector('.user-graphs')
+let bottomOfPage = document.querySelector('#user-bottom')
 let currentUser;
 let indexOfUser  = 1
 const getCurrentUser = () => {
@@ -19,7 +21,9 @@ function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) displayUserProfile(currentUser);
   if (event.target.closest('.hydration')) displayUserDailyHydration();
   if (event.target.closest('.sleep')) displayAllUserSleepData();
-  if (event.target.closest('.activity')) getUserWeeklyActivity();
+  if (event.target.closest('.activity')) {
+    getUserWeeklyActivity()
+  }
 }
 
 const displayUserProfile = currentUser => {
@@ -50,6 +54,8 @@ const displayUserDailyHydration = () => {
 const getUserWaterDrankForTheWeek = () => {
   var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/09/22');
   displayHydrationGraph(UserHydration);
+  hydrationGraph.classList.remove('hidden')
+  hydrationGraph.style.display = 'block'
 }
 
 const displayAllUserSleepData = () => {
@@ -110,6 +116,7 @@ const getUserWeeklyActivity = () => {
   });
   displayActivityToTable(numStepsWeekly);
   displayDailyUserActivity();
+  createActivityLeaderBoards()
 }
 
 const displayActivityToTable = allStats => {
@@ -134,9 +141,12 @@ const displayActivityToTable = allStats => {
 }
 
 const displayDailyUserActivity = () => {
-  userProfileSection.innerHTML = '';
+  userProfileSection.innerHTML = ''
+  console.log('graph',hydrationGraph)
+  hydrationGraph.classList.add('hidden')
+  console.log('graphclasslist',hydrationGraph.classList)
   let buildUserData = `
-    <h3>${currentUser.getUserName()}'s Daily Sleep Stats</h3>
+    <h3>${currentUser.getUserName()}'s Daily Activity Stats</h3>
     <h5>Today's Number Of Steps: ${activity.returnNumOfStepsForGivenDay(currentUser.userData.id, '2019/09/22')}</h5>
     <h5>Today's Minutes Active: ${activity.returnMinutesActiveForGivenDay(currentUser.userData.id, '2019/09/22')}</h5>
     <h5>Today's Distance Walked: ${activity.returnMilesWalkedForGivenDay('2019/09/22')}</h5>
@@ -148,7 +158,67 @@ const clearTableData = () => {
   displayFriendsResultsBody.innerHTML = '';
   displayFriendsResultsHead.innerHTML = '';
 }
+const createActivityLeaderBoards = () =>{
+  let title = document.querySelector('.leader-board-title')
+  title.classList.remove('hidden')
+  addDailyStepleaderBoard()
+  addDailyminutesActiveBoard()
+  addDailyStairClimbedBoard()
+}
+const generateLeaderboard = (activityForLeaderBoard,date) =>{
+      let singleDay = activity.data.filter(user => {
+        return user.date === date;
+      });
+      let sortedArray = singleDay.sort((user,nextUser)=>{
+        return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
+      })
+      return sortedArray
+    }
+    
+    const addDailyStepleaderBoard = () =>{
+    let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
+    let numSteps = document.querySelector('.numSteps')
+    numSteps.classList.remove('hidden')
 
+    numSteps.innerHTML = ''
+    sortedArray.forEach((user,i) =>{
+      if(i <5 ) {
+        let userSection = document.createElement('section');
+        userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps} number of steps`;
+        numSteps.appendChild(userSection)
+      }
+    })
+    bottomOfPage.appendChild(numSteps)
+    }
+    const addDailyminutesActiveBoard = () =>{
+      let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
+      let dailyMinActive = document.querySelector('.minutesActive')
+      dailyMinActive.innerHTML = ''
+      dailyMinActive.classList.remove('hidden')
+    sortedArray.forEach((user,i) =>{
+      if(i<5){
+        let userSection = document.createElement('section');
+        userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive} minutes active` ;
+        dailyMinActive.appendChild(userSection)
+      }
+    })
+    bottomOfPage.appendChild(dailyMinActive)
+    }
+    const addDailyStairClimbedBoard = () =>{
+
+      let sortedArray = generateLeaderboard('flightsOfStairs',"2019/06/28")
+      let flightsOfStairs = document.querySelector('.flights-of-stairs')
+      flightsOfStairs.classList.remove('hidden')
+      flightsOfStairs.innerHTML = ''
+    sortedArray.forEach((user,i) =>{
+      if(i<5){
+        let userSection = document.createElement('section');
+        userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.flightsOfStairs} flights of stairs`;
+        flightsOfStairs.appendChild(userSection)
+      }
+    })
+    bottomOfPage.appendChild(flightsOfStairs)
+    }
 // const getUserStepGoal = currentUser => {
 //   userStepGoal.innerText = currentUser.userData.dailyStepGoal;
 // }
@@ -293,6 +363,8 @@ const clearTableData = () => {
 // }
 
 const displayHydrationGraph = (hydrationStats) => {
+ 
+  console.log('shopuld not contain hidden',hydrationGraph)
   let weeklyDates = hydrationStats.map(cell => cell.date);
   let weeklyNumOunces = hydrationStats.map(cell => {
     return cell.numOunces;
@@ -333,6 +405,8 @@ const displayHydrationGraph = (hydrationStats) => {
       }
     }
   });
+  hydrationGraph.classList.remove('hidden')
+  hydrationGraph.style.display = 'block'
   return myChart;
 }
 
@@ -340,5 +414,7 @@ userHotLinks.addEventListener('click', changeUserDataDisplayHandler);
 
 window.onload = () => {
   getCurrentUser(userData);
+  getUserWaterDrankForTheWeek()
+
   document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
 };

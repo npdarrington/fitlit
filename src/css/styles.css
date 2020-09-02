@@ -62,7 +62,10 @@ body {
 .user-name {
   margin-right: 20px;
 }
-
+.hidden{
+  background-color: red;
+  display: none;
+}
 .nav-right {
   display: flex;
   flex-direction: row;
@@ -105,11 +108,18 @@ body {
 }
 
 /* user graphs */
-.user-profile, .user-graphs {
+.user-profile, canvas,.numSteps, .minutesActive, .flights-of-stairs  {
   border-radius: 10px;
   box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
 }
-
+.numSteps, .minutesActive, .flights-of-stairs{
+  padding: 20px;
+  margin-bottom: 90px;
+}
+#user-bottom {
+display: flex;
+justify-content: space-around;
+}
 .user-graphs {
   display: flex;
   justify-content: space-evenly;
