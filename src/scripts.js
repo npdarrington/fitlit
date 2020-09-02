@@ -33,8 +33,7 @@ const displayUserProfile = currentUser => {
     <h5>Name: ${currentUser.userData.name}</h5>
     <h5>Address: ${currentUser.userData.address}</h5>
     <h5>Email: ${currentUser.userData.email}</h5>
-    <h5>Friends: ${currentUser.userData.friends}</h5>
-    <h5>Stride Length: ${currentUser.userData.strideLength}</h5>
+    
     <h5>Your Daily Step Goal: ${currentUser.userData.dailyStepGoal}</h5>
     <h5>All Users Daily Step Goal: ${allUsers.returnAverageStepGoalAllUsers()}</h5>
   `;
@@ -165,159 +164,59 @@ const createActivityLeaderBoards = () =>{
   addDailyminutesActiveBoard()
   addDailyStairClimbedBoard()
 }
-const generateLeaderboard = (activityForLeaderBoard,date) =>{
-      let singleDay = activity.data.filter(user => {
-        return user.date === date;
-      });
-      let sortedArray = singleDay.sort((user,nextUser)=>{
-        return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
-      })
-      return sortedArray
-    }
+const generateLeaderboard = (activityForLeaderBoard, date) =>{
+  let singleDay = activity.data.filter(user => {
+    return user.date === date;
+  });
+  let sortedArray = singleDay.sort((user,nextUser)=>{
+    return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
+  })
+  return sortedArray
+}
     
-    const addDailyStepleaderBoard = () =>{
-    let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
-    let numSteps = document.querySelector('.numSteps')
-    numSteps.classList.remove('hidden')
+const addDailyStepleaderBoard = () =>{
+  let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
+  let numSteps = document.querySelector('.numSteps')
+  numSteps.classList.remove('hidden')
 
-    numSteps.innerHTML = ''
-    sortedArray.forEach((user,i) =>{
-      if(i <5 ) {
-        let userSection = document.createElement('section');
-        userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps} number of steps`;
-        numSteps.appendChild(userSection)
-      }
-    })
-    bottomOfPage.appendChild(numSteps)
+  numSteps.innerHTML = ''
+  sortedArray.forEach((user, i) =>{
+    if (i < 5 ) {
+      let userSection = document.createElement('section');
+      userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps} number of steps`;
+      numSteps.appendChild(userSection)
     }
-    const addDailyminutesActiveBoard = () =>{
-      let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
-      let dailyMinActive = document.querySelector('.minutesActive')
-      dailyMinActive.innerHTML = ''
-      dailyMinActive.classList.remove('hidden')
-    sortedArray.forEach((user,i) =>{
-      if(i<5){
-        let userSection = document.createElement('section');
-        userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive} minutes active` ;
-        dailyMinActive.appendChild(userSection)
-      }
-    })
-    bottomOfPage.appendChild(dailyMinActive)
+  })
+  bottomOfPage.appendChild(numSteps)
+}
+const addDailyminutesActiveBoard = () =>{
+  let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
+  let dailyMinActive = document.querySelector('.minutesActive')
+  dailyMinActive.innerHTML = ''
+  dailyMinActive.classList.remove('hidden')
+  sortedArray.forEach((user,i) =>{
+    if (i < 5) {
+      let userSection = document.createElement('section');
+      userSection.innerText = `${i + 1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive} minutes active` ;
+      dailyMinActive.appendChild(userSection)
     }
-    const addDailyStairClimbedBoard = () =>{
-
-      let sortedArray = generateLeaderboard('flightsOfStairs',"2019/06/28")
-      let flightsOfStairs = document.querySelector('.flights-of-stairs')
-      flightsOfStairs.classList.remove('hidden')
-      flightsOfStairs.innerHTML = ''
-    sortedArray.forEach((user,i) =>{
-      if(i<5){
-        let userSection = document.createElement('section');
-        userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.flightsOfStairs} flights of stairs`;
-        flightsOfStairs.appendChild(userSection)
-      }
-    })
-    bottomOfPage.appendChild(flightsOfStairs)
+  })
+  bottomOfPage.appendChild(dailyMinActive)
+}
+const addDailyStairClimbedBoard = () =>{
+  let sortedArray = generateLeaderboard('flightsOfStairs', "2019/06/28")
+  let flightsOfStairs = document.querySelector('.flights-of-stairs')
+  flightsOfStairs.classList.remove('hidden')
+  flightsOfStairs.innerHTML = ''
+  sortedArray.forEach((user, i) =>{
+    if (i < 5) {
+      let userSection = document.createElement('section');
+      userSection.innerText = `${i + 1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.flightsOfStairs} flights of stairs`;
+      flightsOfStairs.appendChild(userSection)
     }
-// const getUserStepGoal = currentUser => {
-//   userStepGoal.innerText = currentUser.userData.dailyStepGoal;
-// }
-
-// const getAllUsersStepGoal = () => {
-//   allUsersStepGoal.innerText = allUsers.returnAverageStepGoalAllUsers();
-// }
-
-// const getUserWaterDrankToday = () => {
-//   waterDrankToday.innerText = hydration.returnFluidOuncesForSpecificDay(currentUser.userData.id,'2019/06/15');
-// }
-
-// const getUserDailySleepData = () => {
-//   dailyHoursSlept.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','hoursSlept');
-//   dailyQualitySleep.innerText = sleep.getUserDailySleepStats(currentUser.userData.id, '2019/06/30','sleepQuality');
-// }
-
-// const getUserWeeklyHoursSlept = () => {
-//   let hoursSleptData = sleep.getUserWeeklySleepStats(currentUser.userData.id, '2019/06/23','hoursSlept');
-//   hoursSleptData.forEach(day => {
-//     var hoursSleptDiv = document.createElement('div');
-//     hoursSleptDiv.innerText = `${day.date} : ${day.hoursSlept}`;
-//     weeklyHoursSlept.appendChild(hoursSleptDiv);
-//   });
-// }
-
-// const getUserAllTimeSleepData = () => {
-//   allTimeHoursSlept.innerText = sleep.getUserAverageSleptHoursPerDay(currentUser.userData.id);
-//   allTimeQualitySleep.innerText = sleep.getUserAverageSleepQualityAllTime(currentUser.userData.id);
-// }
-
-// const getDailyActivityData = () =>{
-//   dailyStepCount.innerText = `${activity.data[indexOfUser-1].numSteps} steps `
-//   dailyMinutesActive.innerText = `${activity.data[indexOfUser-1].minutesActive} minutes active `
-//   dailyMilesWalked.innerText = `${activity.returnMilesWalkedForGivenDay(indexOfUser,'2019/06/30')} miles walked`
-// }
-// const generateLeaderboard = (activityForLeaderBoard,date) =>{
-//   let singleDay = activity.data.filter(user => {
-//     return user.date === date;
-//   });
-//   let sortedArray = singleDay.sort((user,nextUser)=>{
-//     return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
-//   })
-//   return sortedArray
-// }
-// const addDailyStepleaderBoard = () =>{
-// let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
-// sortedArray.forEach((user,i) =>{
-//   if(i<=5){
-//     let userSection = document.createElement('div');
-//     userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps}`;
-//     dailyStepsLeaderBoard.appendChild(userSection)
-//   }
-// })
-// }
-// const addDailyminutesActiveBoard = () =>{
-//   let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
-// sortedArray.forEach((user,i) =>{
-//   if(i<5){
-//     let userSection = document.createElement('div');
-//     userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive}`;
-//     dailyminutesActiveLeaderBoard.appendChild(userSection)
-//   }
-// })
-// }
-// const addDailyStairClimbedBoard = () =>{
-//   let sortedArray = generateLeaderboard('flightsOfStairs',"2019/06/28")
-// sortedArray.forEach((user,i) =>{
-//   if(i<=5){
-//     let userSection = document.createElement('div');
-//     userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.flightsOfStairs}`;
-//     dailyStairsClimbed.appendChild(userSection)
-//   }
-// })
-// }
-// const putWeeklyOverViewOnDom = (stepCountOverView,activity,domElement) => {
-//   stepCountOverView.forEach(date =>{
-//     let userSection = document.createElement('div');
-//     let sufix;
-//     if(activity === 'numSteps'){
-//       sufix = 'Steps'
-//     }
-//     else if(activity === 'minutesActive'){
-//       sufix = 'Minutes Active'
-
-//     }
-//     else{
-//       sufix = 'Stairs'
-//     }
-//     userSection.innerText = `${date.date} : ${date[activity]} ${sufix}`;
-//     domElement.appendChild(userSection)
-//   })
-// }
-// const getWeeklyOverview = () => {
-//   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'numSteps'),'numSteps',stepsWeeklyOverview)
-//   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'minutesActive'),'minutesActive',minutesActiveWeeklyOverview)
-//   putWeeklyOverViewOnDom(activity.returnActvityWeeklyOverview(indexOfUser,"2019/06/28",'flightsOfStairs'),'flightsOfStairs',flightsOfStairsWeeklyOverview)
-
-//   }
+  })
+  bottomOfPage.appendChild(flightsOfStairs)
+}
 
 const createFriendsSection = () => {
   let friends = allUsers.userData.filter(user => {
