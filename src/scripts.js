@@ -18,7 +18,8 @@ const activity = new Activity(activityData,getCurrentUser())
 function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) displayUserProfile(currentUser);
   if (event.target.closest('.hydration')) displayUserDailyHydration();
-  if (event.target.closest('.sleep')) displayUserDailySleep();
+  if (event.target.closest('.sleep')) displayAllUserSleepData();
+  if (event.target.closest('.activity')) getUserWeeklyActivity();
 }
 
 const displayUserProfile = currentUser => {
@@ -51,6 +52,11 @@ const getUserWaterDrankForTheWeek = () => {
   displayHydrationGraph(UserHydration);
 }
 
+const displayAllUserSleepData = () => {
+  getUserWeeklySleepQuality();
+  displayUserDailySleep();
+}
+
 const displayUserDailySleep = () => {
   userProfileSection.innerHTML = '';
   let buildUserData = `
@@ -72,7 +78,63 @@ const getUserWeeklySleepQuality = () => {
     user.hoursSlept = sleepHoursSleptData[index].hoursSlept;
   });
   challengeBoardTitle.innerText = 'Weekly Sleep Stats';
-  playWithTheTable(sleepQualityData);
+  displaySleepToTable(sleepQualityData);
+}
+
+const displaySleepToTable = allStats => {
+  clearTableData();
+  let displayTableHead = `
+    <tr><th>Date</th></tr>
+    <tr><th>Hours Slept</th></tr>
+    <tr><th>Sleep Quality</th></tr>
+  `;
+  displayFriendsResultsHead.insertAdjacentHTML('afterbegin', displayTableHead);
+  allStats.forEach(stat => {
+    let displayTableBody = `
+      <tr>
+        <td>${stat.date}</td>
+        <td>${stat.hoursSlept} Hours Slept</td>
+        <td>${stat.sleepQuality} Sleep Quality</td>
+      </tr>`;
+    displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
+  });
+}
+
+const getUserWeeklyActivity = () => {
+  let numStepsWeekly = activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'numSteps');
+  let minutesActiveWeekly = activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'minutesActive');
+  let flightsOfStairsWeely = activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'flightsOfStairs');
+  numStepsWeekly.forEach((user, index) => {
+    user.minutesActive = minutesActiveWeekly[index].minutesActive;
+    user.flightsOfStairs = flightsOfStairsWeely[index].flightsOfStairs;
+  });
+  displayActivityToTable(numStepsWeekly);
+}
+
+const displayActivityToTable = allStats => {
+  clearTableData();
+  let displayTableHead = `
+    <tr><th>Date</th></tr>
+    <tr><th>Number Of Steps</th></tr>
+    <tr><th>Minutes Active</th></tr>
+    <tr><th>Flights Of Stairs</th></tr>
+  `;
+  displayFriendsResultsHead.insertAdjacentHTML('afterbegin', displayTableHead);
+  allStats.forEach(activity => {
+    let displayTableBody = `
+      <tr>
+        <td>${activity.date}</td>
+        <td>${activity.numSteps} Number of Steps</td>
+        <td>${activity.minutesActive} Minutes Active</td>
+        <td>${activity.flightsOfStairs} Flights of Stairs</td>
+      </tr>`;
+    displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
+  });
+}
+
+const clearTableData = () => {
+  displayFriendsResultsBody.innerHTML = '';
+  displayFriendsResultsHead.innerHTML = '';
 }
 
 // const getUserStepGoal = currentUser => {
@@ -217,24 +279,6 @@ const getUserWeeklySleepQuality = () => {
 //     return obj
 //   })
 // }
-
-const playWithTheTable = allStats => {
-  let displayTableHead = `
-    <tr><th>Date</th></tr>
-    <tr><th>Hours Slept</th></tr>
-    <tr><th>Sleep Quality</th></tr>
-  `;
-  displayFriendsResultsHead.insertAdjacentHTML('afterbegin', displayTableHead);
-  allStats.forEach(stat => {
-    let displayTableBody = `
-      <tr>
-        <td>${stat.date}</td>
-        <td>${stat.hoursSlept} Hours Slept</td>
-        <td>${stat.sleepQuality} Sleep Quality</td>
-      </tr>`;
-    displayFriendsResultsBody.insertAdjacentHTML('beforeend', displayTableBody);
-  });
-}
 
 const displayHydrationGraph = (hydrationStats) => {
   let weeklyDates = hydrationStats.map(cell => cell.date);
