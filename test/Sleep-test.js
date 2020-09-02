@@ -12,10 +12,10 @@ describe('Sleep', () => {
   it('Should get a user\'s verage number of hours slept per day', () => {
     expect(sleep.getUserAverageSleptHoursPerDay(1)).to.equal(7.34);
   });
+
   it('Should Not get a user\'s verage number of hours slept per day given an invalid user', () => {
     expect(sleep.getUserAverageSleptHoursPerDay(98)).to.equal(undefined);
   });
-
 
   it('Should should show a user their average sleep quality per day over all time', () => {
     expect(sleep.getUserAverageSleepQualityAllTime(1)).to.equal(2.7);

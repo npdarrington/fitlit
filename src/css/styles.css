@@ -5,7 +5,7 @@
 }
 
 :root {
-  --body-bg-color-top: #87CEFA;
+  --body-bg-color-top: #5252ff;
   --body-bg-color: #fff;
   --link-hover-color: #296E85;
   --date-picker-border: #1E5162;
@@ -28,6 +28,10 @@ body {
 }
 
 /* header */
+.user-name-large {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
 
 #nav {
   display: flex;
@@ -91,37 +95,31 @@ body {
 }
 
 /* user profile */
-
 .user-profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  grid-area: 0 / 0;
-}
-
-.user-profile img {
-  width: 150px;
-}
-
-.user-profile-name {
-  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  margin-right: 10px;
 }
 
 /* user graphs */
+.user-profile, .user-graphs {
+  border-radius: 10px;
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
+}
 
 .user-graphs {
   display: flex;
   justify-content: space-evenly;
-  grid-area: 0 / 1;
 }
 
-.hydration-stats, .sleep-stats, .activity-stats {
+.hydration-stats {
   margin: 0 20px;
   height: 200px;
   width: 33%;
-  background-color: lightgray;
-  border-radius: 10px;
-  box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
+  background-color: white;
 }
 
 /* hotlinks */
@@ -152,13 +150,24 @@ body {
   transform: scale(1.2);
   transition: all 0.25s;
   box-shadow: 0 0 6px rgba(0, 0, 0, .3);
+  color: white;
+}
+
+.hotlink-image:hover {
+  filter: brightness(0) invert(1);
 }
 
 /* user challenge board */
+.display-content-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .user-challenge-board {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
   box-shadow: 0 0 12px rgba(0, 0, 0, .3);
   border-radius: 10px;
 }
