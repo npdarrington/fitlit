@@ -28,7 +28,7 @@ class Sleep {
     const userSleepQualityAverage =  singleUserData.reduce((total, user) => {
       return total += user.sleepQuality;
     }, 0);
-    return userSleepQualityAverage / singleUserData.length;
+    return +(userSleepQualityAverage / singleUserData.length).toFixed(2);
   }
 
   getUserDailySleepStats(userId, date, prop) {

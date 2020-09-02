@@ -3,9 +3,17 @@ class Activity {
     this.data = ActivityTestData
     this.user = user
   }
+  returnNumOfStepsForGivenDay(userId, date) {
+    let singleUserData = this.data.filter(user => {
+      return user.userID === userId;
+    });
+    let singleDay = singleUserData.filter(user => {
+      return user.date === date;
+    });
+    return singleDay[0].numSteps;
+  }
   returnMilesWalkedForGivenDay(date) {
     let currentUser = this.user
-    console.log('algo',currentUser)
     let singleUserData = this.data.filter(user => {
       return user.userID === currentUser.id;
     });
@@ -14,7 +22,6 @@ class Activity {
     })
     let userNumberStepsPerMile = Math.round(5280 / currentUser.strideLength)
     let milesWalked = singleDay[0].numSteps / userNumberStepsPerMile
-    console.log(milesWalked)
     return Math.round(milesWalked * 100) / 100
   }
   returnMinutesActiveForGivenDay(userId, date) {

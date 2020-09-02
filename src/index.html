@@ -11,7 +11,7 @@
         <header id="header">
           <nav id="nav">
             <section class="nav-left">
-              <article class="user-name">Team Member!</article>
+              <article class="user-name"></article>
               <a href="#" class="top-nav-item">Home</a>
               <a href="#" class="top-nav-item">About</a>
               <a href="#" class="top-nav-item">Conversation</a>
@@ -30,82 +30,60 @@
           </nav>
         </header>
         <main id="main">
-          <section class="user-profile">
-            <img src="./images/user.png" alt="Profile" class="user-large-profile">
-            <h3 class="user-profile-name">Team Member!</h3>
-          </section>
+          <section class="user-profile"></section>
           <section class="user-graphs">
-            <article class="hydration-stats"></article>
-            <article class="sleep-stats"></article>
-            <article class="activity-stats"></article>
+            <canvas id="hydration-stats" class="hydration-stats" width="600px" height="150px"></article>
           </section>
           <section class="user-hotlinks">
             <section class="hotlinks-row">
-              <article class="hotlink-items">
+              <article class="hotlink-items activity">
                 <img class="hotlink-image" src="./images/activity.png" alt="Activity">
-                <summary>Activity</summary>
+                <p>Activity</p>
               </article>
-              <article class="hotlink-items">
+              <article class="hotlink-items sleep">
                 <img class="hotlink-image" src="./images/sleep.png" alt="Sleep">
-                <summary>Sleep</summary>
+                <p>Sleep</p>
               </article>
             </section>
             <section class="hotlinks-row">
-              <article class="hotlink-items">
+              <article class="hotlink-items hydration">
                 <img class="hotlink-image" src="./images/water.png" alt="Hydration">
-                <summary>Hydration</summary>
+                <p>Hydration</p>
               </article>
-              <article class="hotlink-items">
-                <img class="hotlink-2" src="./images/calendar.png" alt="Calendar">
-                <summary>Calendar</summary>
+              <article class="hotlink-items calendar">
+                <img class="hotlink-image" src="./images/calendar.png" alt="Calendar">
+                <p>Calendar</p>
               </article>
             </section>
             <section class="hotlinks-row">
-              <article class="hotlink-items">
+              <article class="hotlink-items profile">
                 <img class="hotlink-image" src="./images/resume.png" alt="User Profile">
-                <summary>User Profile</summary>
+                <p>User Profile</p>
               </article>
-              <article class="hotlink-items">
-                <img class="hotlink-2" src="./images/question.png" alt="Support">
-                <summary>Support</summary>
+              <article class="hotlink-items support">
+                <img class="hotlink-image" src="./images/question.png" alt="Support">
+                <p>Support</p>
               </article>
             </section>
           </section>
-          <section class="user-challenge-board">
-            <table class="display-friends-results">
-              <thead>
-                <tr><th>Column1</th></tr>
-                <tr><th>Column2</th></tr>
-                <tr><th>Column3</th></tr>
-                <tr><th>Column4</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Row 1 Column 1</td>
-                  <td>Row 1 Column 2</td>
-                  <td>Row 1 Column 3</td>
-                  <td>Row 1 Column 4</td>
-                </tr>
-                <tr>
-                  <td>Row 2 Column 1</td>
-                  <td>Row 2 Column 2</td>
-                  <td>Row 2 Column 3</td>
-                  <td>Row 2 Column 4</td>
-                </tr>
-                <tr>
-                  <td>Row 3 Column 1</td>
-                  <td>Row 3 Column 2</td>
-                  <td>Row 3 Column 3</td>
-                  <td>Row 3 Column 4</td>
-                </tr>
-                <tr>
-                  <td>Row 4 Column 1</td>
-                  <td>Row 4 Column 2</td>
-                  <td>Row 4 Column 3</td>
-                  <td>Row 4 Column 4</td>
-                </tr>
-              </tbody>
-            </table>
+          <section class="display-table">
+            <section class="display-content-top">
+              <article class="display-content-left">
+                <h3 class="challenge-board-title" style="padding: 20px; margin: 15px 0"></h3>
+              </article>
+              <article class="display-content-right">
+                <button>Sleep Quality</button>
+                <button>Hours Slept</button>
+                <button>Average Hours Slept</button>
+                <button>Average Sleep Quality</button>
+              </article>
+            </section>
+            <section class="user-challenge-board">
+              <table class="display-friends-results">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </section>
           </section>
         </main>
       </section>
@@ -119,6 +97,7 @@
     <script src="./Hydration.js"></script>
     <script src="./Sleep.js"></script>
     <script src = "./Activity.js"></script>
+    <script src="../node_modules/chart.js/dist/Chart.js"></script>
 
 
     <script type="text/javascript" src="../data/users.js"></script>

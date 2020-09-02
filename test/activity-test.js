@@ -1,13 +1,10 @@
 const chai = require('chai')
 const expect = chai.expect
 const Activity = require('../src/Activity.js')
-const User = require ('../src/User.js');
 const UserRepo = require ('../src/userRepo.js');
 const activityTestData = require('./activity-test-data.js')
 const userTestData = require('./userTestData.js');
-const activityData = require('./activity-test-data.js');
 let activity;
-let user;
 
 beforeEach(function() {
   userRepo = new UserRepo(userTestData)
@@ -15,7 +12,6 @@ beforeEach(function() {
 })
 describe('Activity', ()=>{
   it('Should, given a specific day return the miles a user has walked based on their number of steps', () => {
-    console.log('user',activity.user)
     expect(activity.returnMilesWalkedForGivenDay("2019/06/28")).to.equal(8.56)
   })
   it('Should return how many minutes were they active for a given day ',()=>{
