@@ -51,7 +51,7 @@ const displayUserDailyHydration = () => {
 }
 
 const getUserWaterDrankForTheWeek = () => {
-  var UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/09/22');
+  let UserHydration =  hydration.returnUserWeeklyFluidConsumption(currentUser.userData.id, '2019/09/22');
   displayHydrationGraph(UserHydration);
   hydrationGraph.classList.remove('hidden')
   hydrationGraph.style.display = 'block'
@@ -223,14 +223,13 @@ const createFriendsSection = () => {
       return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
     })
   let friendsWeeklySteps = findFriendsWeeklySteps(friends)
-  var stepCounts =  findUserStepCounts(friendsWeeklySteps)
-
-  var sortedSteps = stepCounts.sort((firstValue,secondValue) => {
+  let stepCounts =  findUserStepCounts(friendsWeeklySteps)
+  let sortedSteps = stepCounts.sort((firstValue,secondValue) => {
   return secondValue.steps - firstValue.steps
   })
   addFriendsToHtml(sortedSteps)
 }
-findFriendsWeeklySteps = (friends) =>{
+const findFriendsWeeklySteps = (friends) =>{
   return friends.map(user => {
     return { 
       id : user.id,
@@ -238,22 +237,22 @@ findFriendsWeeklySteps = (friends) =>{
     }
   })
 }
-addFriendsToHtml = (sortedSteps) =>{
+const addFriendsToHtml = (sortedSteps) =>{
   let competion = document.querySelector('.friend-competition')
   sortedSteps.forEach(user =>{
-    var friendSection = document.createElement('div')
-    if(user.id === indexOfUser ){
+    let friendSection = document.createElement('div')
+    if (user.id === indexOfUser ) {
       friendSection.innerText = `You : ${user.steps} steps`
 
-    }else{
+    } else {
     friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
   }
   competion.appendChild(friendSection)
   })
 }
-findUserStepCounts = (friendsWeeklySteps) => {
+const findUserStepCounts = (friendsWeeklySteps) => {
   return friendsWeeklySteps.map(userSteps =>{
-    var obj = {}
+    let obj = {}
     obj.id = userSteps.id
     obj.steps =  userSteps.date.reduce((startingValue,date) =>{
       return startingValue += date.numSteps
@@ -261,18 +260,15 @@ findUserStepCounts = (friendsWeeklySteps) => {
     return obj
   })
 }
-display= () =>{
 
-}
 
 const displayHydrationGraph = (hydrationStats) => {
  
-  console.log('shopuld not contain hidden',hydrationGraph)
   let weeklyDates = hydrationStats.map(cell => cell.date);
   let weeklyNumOunces = hydrationStats.map(cell => {
     return cell.numOunces;
   });
-  var myChart = new Chart(hydrationGraph, {
+  let myChart = new Chart(hydrationGraph, {
     type: 'bar',
     data: {
       labels: weeklyDates,
