@@ -14,7 +14,7 @@ const getCurrentUser = () => {
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
-const activity = new Activity(activityData,allUsers.returnUserData(indexOfUser))
+const activity = new Activity(activityData, allUsers.returnUserData(indexOfUser))
 
 function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) {
@@ -171,14 +171,14 @@ const generateLeaderboard = (activityForLeaderBoard, date) =>{
   let singleDay = activity.data.filter(user => {
     return user.date === date;
   });
-  let sortedArray = singleDay.sort((user,nextUser)=>{
+  let sortedArray = singleDay.sort((user, nextUser)=>{
     return nextUser[activityForLeaderBoard] - user[activityForLeaderBoard]
   })
   return sortedArray
 }
     
 const addDailyStepleaderBoard = () =>{
-  let sortedArray = generateLeaderboard('numSteps',"2019/06/28")
+  let sortedArray = generateLeaderboard('numSteps', "2019/06/28")
   let numSteps = document.querySelector('.numSteps')
   numSteps.classList.remove('hidden')
 
@@ -186,21 +186,21 @@ const addDailyStepleaderBoard = () =>{
   sortedArray.forEach((user, i) =>{
     if (i < 5 ) {
       let userSection = document.createElement('section');
-      userSection.innerText = `${i+1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps} number of steps`;
+      userSection.innerText = `${i + 1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.numSteps} number of steps`;
       numSteps.appendChild(userSection)
     }
   })
   bottomOfPage.appendChild(numSteps)
 }
 const addDailyminutesActiveBoard = () =>{
-  let sortedArray = generateLeaderboard('minutesActive',"2019/06/28")
+  let sortedArray = generateLeaderboard('minutesActive', "2019/06/28")
   let dailyMinActive = document.querySelector('.minutesActive')
   dailyMinActive.innerHTML = ''
   dailyMinActive.classList.remove('hidden')
-  sortedArray.forEach((user,i) =>{
+  sortedArray.forEach((user, i) =>{
     if (i < 5) {
       let userSection = document.createElement('section');
-      userSection.innerText = `${i + 1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive} minutes active` ;
+      userSection.innerText = `${i + 1} ${new User(allUsers.returnUserData(user.userID)).userData.name} : ${user.minutesActive} minutes active`;
       dailyMinActive.appendChild(userSection)
     }
   })
@@ -227,7 +227,7 @@ const createFriendsSection = () => {
     })
   let friendsWeeklySteps = findFriendsWeeklySteps(friends)
   let stepCounts =  findUserStepCounts(friendsWeeklySteps)
-  let sortedSteps = stepCounts.sort((firstValue,secondValue) => {
+  let sortedSteps = stepCounts.sort((firstValue, secondValue) => {
   return secondValue.steps - firstValue.steps
   })
   addFriendsToHtml(sortedSteps)
@@ -235,8 +235,8 @@ const createFriendsSection = () => {
 const findFriendsWeeklySteps = (friends) =>{
   return friends.map(user => {
     return { 
-      id : user.id,
-      date : activity.returnActvityWeeklyOverview(user.id,"2019/06/28",'numSteps')
+      id: user.id,
+      date: activity.returnActvityWeeklyOverview(user.id, "2019/06/28", 'numSteps')
     }
   })
 }
@@ -248,7 +248,7 @@ const addFriendsToHtml = (sortedSteps) =>{
       friendSection.innerText = `You : ${user.steps} steps`
 
     } else {
-    friendSection.innerText = `${allUsers.userData[user.id-1].name}: ${user.steps} steps`
+    friendSection.innerText = `${allUsers.userData[user.id - 1].name}: ${user.steps} steps`
   }
   competion.appendChild(friendSection)
   })
@@ -257,7 +257,7 @@ const findUserStepCounts = (friendsWeeklySteps) => {
   return friendsWeeklySteps.map(userSteps =>{
     let obj = {}
     obj.id = userSteps.id
-    obj.steps =  userSteps.date.reduce((startingValue,date) =>{
+    obj.steps =  userSteps.date.reduce((startingValue, date) =>{
       return startingValue += date.numSteps
     }, 0)
     return obj
