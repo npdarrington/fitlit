@@ -141,9 +141,7 @@ const displayActivityToTable = allStats => {
 
 const displayDailyUserActivity = () => {
   userProfileSection.innerHTML = ''
-  console.log('graph',hydrationGraph)
   hydrationGraph.classList.add('hidden')
-  console.log('graphclasslist',hydrationGraph.classList)
   let buildUserData = `
     <h3>${currentUser.getUserName()}'s Daily Activity Stats</h3>
     <h5>Today's Number Of Steps: ${activity.returnNumOfStepsForGivenDay(currentUser.userData.id, '2019/09/22')}</h5>
