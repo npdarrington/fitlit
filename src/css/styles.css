@@ -4,6 +4,17 @@
   margin: 0;
 }
 
+h3 {
+  font-size: 18px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 15px;
+  line-height: 20px;
+}
+
 :root {
   --body-bg-color-top: #5252ff;
   --body-bg-color: #fff;
@@ -109,18 +120,25 @@ body {
 }
 
 /* user graphs */
-.user-profile, canvas, .numSteps, .minutesActive, .flights-of-stairs{
+.user-profile, canvas {
   border-radius: 10px;
   box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
 }
 
-.numSteps, .minutesActive, .flights-of-stairs{
+.numSteps, .minutesActive, .flights-of-stairs, .friend-competition {
+  box-shadow: 0 0 12px rgba(0, 0, 0, .3);
+}
+
+.numSteps, .minutesActive, .flights-of-stairs {
+  border-radius: 10px;
   padding: 20px;
+  margin-top: 10px;
 }
 
 #user-bottom {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .user-graphs {
@@ -200,4 +218,11 @@ body {
   justify-content: space-around;
   border-top: 1px solid black;
   padding: 10px 0;
+}
+
+/* Friend competition */
+.friend-competition {
+  border-radius: 10px;
+  margin: 57px 10px 0 0;
+  padding: 10px;
 }
