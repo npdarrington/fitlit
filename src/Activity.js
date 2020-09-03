@@ -3,6 +3,7 @@ class Activity {
     this.data = ActivityTestData
     this.user = user
   }
+
   returnNumOfStepsForGivenDay(userId, date) {
     let singleUserData = this.data.filter(user => {
       return user.userID === userId;
@@ -12,6 +13,7 @@ class Activity {
     });
     return singleDay[0].numSteps;
   }
+
   returnMilesWalkedForGivenDay(date) {
     let currentUser = this.user
     let singleUserData = this.data.filter(user => {
@@ -24,6 +26,7 @@ class Activity {
     let milesWalked = singleDay[0].numSteps / userNumberStepsPerMile
     return Math.round(milesWalked * 100) / 100
   }
+
   returnMinutesActiveForGivenDay(userId, date) {
     let singleUserData = this.data.filter(user => {
       return user.userID === userId;
@@ -33,21 +36,23 @@ class Activity {
     })
     return singleDay[0].minutesActive
   }
+
   returnActvityWeeklyOverview(userId, date, activity) {
     let singleUserData = this.data.filter(user => { 
       return user.userID === userId
     })
-    let dateObject =  singleUserData.find(user => user.date === date )
-    let indexOfstartDateObject = singleUserData.indexOf(dateObject)
+    let currentDate =  singleUserData.find(user => user.date === date )
+    let indexOfstartDateObject = singleUserData.indexOf(currentDate)
     var userActivity = singleUserData.map(user =>{
-      var dataAndNumOfOuncesDrank = {}
-      dataAndNumOfOuncesDrank.date  = user.date;
-      dataAndNumOfOuncesDrank[activity] =  user[activity];
-      return dataAndNumOfOuncesDrank
+      var dateAndActivity = {}
+      dateAndActivity.date  = user.date;
+      dateAndActivity[activity] =  user[activity];
+      return dateAndActivity
     })
-    var splicedArray = userActivity.slice(indexOfstartDateObject - 7, indexOfstartDateObject + 1 ).reverse()
+    var splicedArray = userActivity.slice(indexOfstartDateObject - 5, indexOfstartDateObject + 2 ).reverse()
     return splicedArray
   }
+
   returnAverageActiveMinutesForWeek(userId, startDate) {
     let singleUserData = this.data.filter(user => { 
       return user.userID === userId
@@ -62,8 +67,8 @@ class Activity {
       return acc += curr
     }, 0)
     return totalMinutesActive / 7
+  }
 
-}
   returnIfUserReachedStepGoalForDay(userId, date) {
     let user = this.user
     let userStepGoal = user.dailyStepGoal
@@ -76,6 +81,7 @@ class Activity {
     })
     return singleDay[0].numSteps > userStepGoal
   }
+
   returnAllDaysAUserReachedTheirStepGoal(userId) {
     let user = this.user
     let userStepGoal = user.dailyStepGoal
@@ -93,6 +99,7 @@ class Activity {
       return acc
     }, [])
   }
+  
   returnAlltimeStairClimbingRecord(userId) {
     let singleUserData = this.data.filter(user => {
       return user.userID === userId;
@@ -105,6 +112,7 @@ class Activity {
     })
     return allUserStairsClimbedSorted[0]
   }
+
   returnAverageNumberofActivityForDay(date, activity) {
     let singleDay = this.data.filter(user => {
       return user.date === date;
@@ -119,12 +127,14 @@ class Activity {
     let totalNumberOfUsers = this.findTotalNumberofUsers()
     return Math.round(totalActivityInDay / totalNumberOfUsers)
   }
+
   findTotalNumberofUsers() {
     return new Set (this.data.map((user =>{
       return user.userID
     }))).size
   }
 }
+
 if (typeof module !== 'undefined') {
   module.exports = Activity
 }

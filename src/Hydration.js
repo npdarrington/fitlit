@@ -20,12 +20,12 @@ class Hydration {
 
   returnFluidOuncesForSpecificDay(userId, date) {
     const singleUserData = this.getCurrentUser(userId);
-    if(singleUserData.length === 0){
+    if (singleUserData.length === 0) {
       return undefined
     }
     return singleUserData.find(user => user.date === date).numOunces;
   }
-
+  
   returnUserWeeklyFluidConsumption(userId, startDate) {
     const singleUserData = this.getCurrentUser(userId);
     const startDateObject = singleUserData.find(user => user.date === startDate);

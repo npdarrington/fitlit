@@ -9,7 +9,7 @@ class Sleep {
 
   getUserAverageSleptHoursPerDay(userId) {
     const singleUserData = this.getCurrentUser(userId);
-    if(singleUserData.length === 0){
+    if (singleUserData.length === 0) {
       return undefined
     }
     const userSleepPerDayAverage = singleUserData.reduce((total, user) => {
@@ -22,7 +22,7 @@ class Sleep {
 
   getUserAverageSleepQualityAllTime(userId) {
     const singleUserData = this.getCurrentUser(userId);
-    if(singleUserData.length === 0){
+    if (singleUserData.length === 0) {
       return undefined
     }
     const userSleepQualityAverage =  singleUserData.reduce((total, user) => {
