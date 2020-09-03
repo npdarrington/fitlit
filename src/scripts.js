@@ -109,9 +109,9 @@ const displaySleepToTable = allStats => {
 }
 
 const getUserWeeklyActivity = () => {
-  let numStepsWeekly = activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'numSteps');
-  let minutesActiveWeekly = activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'minutesActive');
-  let flightsOfStairsWeely = activity.returnActvityWeeklyOverview(indexOfUser, "2019/06/28", 'flightsOfStairs');
+  let numStepsWeekly = activity.returnActvityWeeklyOverview(indexOfUser, '2019/09/22', 'numSteps');
+  let minutesActiveWeekly = activity.returnActvityWeeklyOverview(indexOfUser, '2019/09/22', 'minutesActive');
+  let flightsOfStairsWeely = activity.returnActvityWeeklyOverview(indexOfUser, '2019/09/22', 'flightsOfStairs');
   numStepsWeekly.forEach((user, index) => {
     user.minutesActive = minutesActiveWeekly[index].minutesActive;
     user.flightsOfStairs = flightsOfStairsWeely[index].flightsOfStairs;
@@ -176,7 +176,7 @@ const generateLeaderboard = (activityForLeaderBoard, date) =>{
 }
     
 const addDailyStepleaderBoard = () =>{
-  let sortedArray = generateLeaderboard('numSteps', "2019/06/28")
+  let sortedArray = generateLeaderboard('numSteps', '2019/09/22')
   let numSteps = document.querySelector('.numSteps')
   numSteps.classList.remove('hidden')
 
@@ -191,7 +191,7 @@ const addDailyStepleaderBoard = () =>{
   bottomOfPage.appendChild(numSteps)
 }
 const addDailyminutesActiveBoard = () =>{
-  let sortedArray = generateLeaderboard('minutesActive', "2019/06/28")
+  let sortedArray = generateLeaderboard('minutesActive','2019/09/22')
   let dailyMinActive = document.querySelector('.minutesActive')
   dailyMinActive.innerHTML = ''
   dailyMinActive.classList.remove('hidden')
@@ -205,7 +205,7 @@ const addDailyminutesActiveBoard = () =>{
   bottomOfPage.appendChild(dailyMinActive)
 }
 const addDailyStairClimbedBoard = () =>{
-  let sortedArray = generateLeaderboard('flightsOfStairs', "2019/06/28")
+  let sortedArray = generateLeaderboard('flightsOfStairs', '2019/09/22')
   let flightsOfStairs = document.querySelector('.flights-of-stairs')
   flightsOfStairs.classList.remove('hidden')
   flightsOfStairs.innerHTML = ''
@@ -234,7 +234,7 @@ const findFriendsWeeklySteps = (friends) =>{
   return friends.map(user => {
     return { 
       id: user.id,
-      date: activity.returnActvityWeeklyOverview(user.id, "2019/06/28", 'numSteps')
+      date: activity.returnActvityWeeklyOverview(user.id, '2019/09/22', 'numSteps')
     }
   })
 }
