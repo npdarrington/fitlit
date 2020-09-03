@@ -24,7 +24,7 @@ The fitlit project involved the creation of several different classes to allow f
  The fitlit application looks as followed 
  ![Fitlit-dashboard](./readme-assests/Fitlit-dashboard.png)
  Here is a demo of our application in action
-  ![Fitlit-dashboard](./readme-assests/Fitlit.gif)
+  ![Fitlit-dashboard](./readme-assests/fitlit.gif)
   
 ## Wins / Learning Experiences
 Node and JS are not the same thing. The browser can not use require. This forced us to refactor our classes as well as how we were accessing the different classes in scripts.js
