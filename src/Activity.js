@@ -49,7 +49,7 @@ class Activity {
       dateAndActivity[activity] =  user[activity];
       return dateAndActivity
     })
-    var splicedArray = userActivity.slice(indexOfstartDateObject - 5, indexOfstartDateObject + 2 ).reverse()
+    var splicedArray = userActivity.slice(indexOfstartDateObject - 6, indexOfstartDateObject + 2 ).reverse()
     return splicedArray
   }
 

@@ -49,7 +49,7 @@ class Sleep {
     const getUserSevenDaySleepData = singleUserData.map(user => {
       return { date: user.date, [prop]: user[prop] }
     });
-    return getUserSevenDaySleepData.splice(indexOfStartDateObject, 7).reverse();
+    return getUserSevenDaySleepData.splice(indexOfStartDateObject - 6, 7).reverse();
   }
 
   getAllUsersAverageSleepQuality() {
