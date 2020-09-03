@@ -5,16 +5,18 @@ let hydrationGraph = document.querySelector('#hydration-stats');
 let userHotLinks = document.querySelector('.user-hotlinks');
 let bottomOfPage = document.querySelector('#user-bottom')
 let currentUser;
-let indexOfUser  = 1
-const getCurrentUser = () => {
-  currentUser = new User(allUsers.returnUserData(1));
-  return currentUser
-}
+let indexOfUser  = Math.floor(Math.random() * 50) + 1;     // returns a random integer from 0 to 9
+
+
 const allUsers = new UserRepo(userData);
 const hydration = new Hydration(hydrationData);
 const sleep = new Sleep(sleepData);
 const activity = new Activity(activityData, allUsers.returnUserData(indexOfUser))
 
+const getCurrentUser = () => {
+  currentUser = new User(allUsers.returnUserData(indexOfUser));
+  return currentUser
+}
 function changeUserDataDisplayHandler(event) {
   if (event.target.closest('.profile')) {
     displayUserProfile(currentUser)
@@ -72,7 +74,7 @@ const displayUserDailySleep = () => {
     <h3>${currentUser.getUserName()}'s Daily Sleep Stats</h3>
     <h5>Today's Hours Slept: ${sleep.getUserDailySleepStats(currentUser.userData.id, '2019/09/22', 'hoursSlept')}</h5>
     <h5>Today's Sleep Quality: ${sleep.getUserDailySleepStats(currentUser.userData.id, '2019/09/22', 'sleepQuality')}</h5>
-    <br><br>
+    <br>
     <h3>${currentUser.getUserName()}'s All-Time Sleep Stats</h3>
     <h5>All Time Avg Hours Slept: ${sleep.getUserAverageSleptHoursPerDay(currentUser.userData.id)}</h5>
     <h5>All Time Avg Sleep Quality: ${sleep.getUserAverageSleepQualityAllTime(currentUser.userData.id)}</h5>
@@ -191,7 +193,7 @@ const addDailyStepleaderBoard = () =>{
   bottomOfPage.appendChild(numSteps)
 }
 const addDailyminutesActiveBoard = () =>{
-  let sortedArray = generateLeaderboard('minutesActive','2019/09/22')
+  let sortedArray = generateLeaderboard('minutesActive', '2019/09/22')
   let dailyMinActive = document.querySelector('.minutesActive')
   dailyMinActive.innerHTML = ''
   dailyMinActive.classList.remove('hidden')
@@ -221,12 +223,12 @@ const addDailyStairClimbedBoard = () =>{
 
 const createFriendsSection = () => {
   let friends = allUsers.userData.filter(user => {
-      return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
-    })
+    return currentUser.userData.friends.includes(user.id) || user.id === indexOfUser
+  })
   let friendsWeeklySteps = findFriendsWeeklySteps(friends)
   let stepCounts =  findUserStepCounts(friendsWeeklySteps)
   let sortedSteps = stepCounts.sort((firstValue, secondValue) => {
-  return secondValue.steps - firstValue.steps
+    return secondValue.steps - firstValue.steps
   })
   addFriendsToHtml(sortedSteps)
 }
@@ -246,9 +248,9 @@ const addFriendsToHtml = (sortedSteps) =>{
       friendSection.innerText = `You : ${user.steps} steps`
 
     } else {
-    friendSection.innerText = `${allUsers.userData[user.id - 1].name}: ${user.steps} steps`
-  }
-  competion.appendChild(friendSection)
+      friendSection.innerText = `${allUsers.userData[user.id - 1].name}: ${user.steps} steps`
+    }
+    competion.appendChild(friendSection)
   })
 }
 const findUserStepCounts = (friendsWeeklySteps) => {
@@ -261,7 +263,6 @@ const findUserStepCounts = (friendsWeeklySteps) => {
     return obj
   })
 }
-
 
 const displayHydrationGraph = (hydrationStats) => {
  
@@ -309,8 +310,8 @@ const displayHydrationGraph = (hydrationStats) => {
   hydrationGraph.style.display = 'block'
   return myChart;
 }
-addUserNametoDom = () => {
-document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
+let addUserNametoDom = () => {
+  document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
 }
 userHotLinks.addEventListener('click', changeUserDataDisplayHandler);
 

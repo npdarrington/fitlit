@@ -41,8 +41,8 @@ class Activity {
     let singleUserData = this.data.filter(user => { 
       return user.userID === userId
     })
-    let Currentdate =  singleUserData.find(user => user.date === date )
-    let indexOfstartDateObject = singleUserData.indexOf(Currentdate)
+    let currentDate =  singleUserData.find(user => user.date === date )
+    let indexOfstartDateObject = singleUserData.indexOf(currentDate)
     var userActivity = singleUserData.map(user =>{
       var dateAndActivity = {}
       dateAndActivity.date  = user.date;

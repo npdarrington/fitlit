@@ -14,17 +14,17 @@ describe('Activity', ()=>{
   it('Should, given a specific day return the miles a user has walked based on their number of steps', () => {
     expect(activity.returnMilesWalkedForGivenDay("2019/06/28")).to.equal(8.56)
   })
-  it('Should return how many minutes were they active for a given day ',()=>{
-    expect(activity.returnMinutesActiveForGivenDay(1,"2019/06/28")).to.equal(169)
+  it('Should return how many minutes were they active for a given day ', ()=>{
+    expect(activity.returnMinutesActiveForGivenDay(1, "2019/06/28")).to.equal(169)
   })
   it('Should return how many minutes active did they average for a given week', ()=>{
-    expect(activity.returnAverageActiveMinutesForWeek(1,"2019/06/21")).to.equal(140)
+    expect(activity.returnAverageActiveMinutesForWeek(1, "2019/06/21")).to.equal(140)
   })
   it('Should Not return how many minutes active did they average for a given week given an invalid user', ()=>{
-    expect(activity.returnAverageActiveMinutesForWeek(99,"2019/06/21")).to.equal(0)
+    expect(activity.returnAverageActiveMinutesForWeek(99, "2019/06/21")).to.equal(0)
   })
-  it('Should return if a user reached their step goal for a given day ',()=> {
-    expect(activity.returnIfUserReachedStepGoalForDay(1,"2019/06/28")).to.equal(true)
+  it('Should return if a user reached their step goal for a given day ', ()=> {
+    expect(activity.returnIfUserReachedStepGoalForDay(1, "2019/06/28")).to.equal(true)
   })
  
   it('Should return all days a user reached their step goal', ()=>{
@@ -45,7 +45,7 @@ describe('Activity', ()=>{
   it('Should NOT return all all-time stair climbing record when given invalid user Id', ()=>{
     expect(activity.returnAlltimeStairClimbingRecord(51)).to.equal(undefined)
   })
-  it('Should return average number of stairs climbed for a specified date for all user',()=>{
+  it('Should return average number of stairs climbed for a specified date for all user', ()=>{
     expect(activity.returnAverageNumberofActivityForDay("2019/06/21", 'flightsOfStairs')).to.equal(20)
   })
   it('Should Not return average number of stairs climbed for a specified date for all users for a invalid date',()=>{
