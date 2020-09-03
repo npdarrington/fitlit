@@ -7,8 +7,8 @@
 :root {
   --body-bg-color-top: #5252ff;
   --body-bg-color: #fff;
-  --link-hover-color: #296E85;
-  --date-picker-border: #1E5162;
+  --link-hover-color: #E5A1AD;
+  --date-picker-border: #3939cf;
   --box-shadow-large: 6px 6px 2px 1px rgba(0, 0, 0, .2);
 }
 
@@ -62,10 +62,11 @@ body {
 .user-name {
   margin-right: 20px;
 }
+
 .hidden{
-  background-color: red;
   display: none;
 }
+
 .nav-right {
   display: flex;
   flex-direction: row;
@@ -108,18 +109,20 @@ body {
 }
 
 /* user graphs */
-.user-profile, canvas,.numSteps, .minutesActive, .flights-of-stairs{
+.user-profile, canvas, .numSteps, .minutesActive, .flights-of-stairs{
   border-radius: 10px;
   box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, .2);
 }
+
 .numSteps, .minutesActive, .flights-of-stairs{
   padding: 20px;
-  margin-bottom: 90px;
 }
+
 #user-bottom {
-display: flex;
-justify-content: space-around;
+  display: flex;
+  flex-direction: column;
 }
+
 .user-graphs {
   display: flex;
   justify-content: space-evenly;
@@ -168,11 +171,8 @@ justify-content: space-around;
 }
 
 /* user challenge board */
-.display-content-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+.display-table {
+  margin-top: 20px;
 }
 
 .user-challenge-board {
