@@ -41,15 +41,15 @@ class Activity {
     let singleUserData = this.data.filter(user => { 
       return user.userID === userId
     })
-    let dateObject =  singleUserData.find(user => user.date === date )
-    let indexOfstartDateObject = singleUserData.indexOf(dateObject)
+    let Currentdate =  singleUserData.find(user => user.date === date )
+    let indexOfstartDateObject = singleUserData.indexOf(Currentdate)
     var userActivity = singleUserData.map(user =>{
-      var dataAndNumOfOuncesDrank = {}
-      dataAndNumOfOuncesDrank.date  = user.date;
-      dataAndNumOfOuncesDrank[activity] =  user[activity];
-      return dataAndNumOfOuncesDrank
+      var dateAndActivity = {}
+      dateAndActivity.date  = user.date;
+      dateAndActivity[activity] =  user[activity];
+      return dateAndActivity
     })
-    var splicedArray = userActivity.slice(indexOfstartDateObject - 7, indexOfstartDateObject + 1 ).reverse()
+    var splicedArray = userActivity.slice(indexOfstartDateObject - 5, indexOfstartDateObject + 2 ).reverse()
     return splicedArray
   }
 
