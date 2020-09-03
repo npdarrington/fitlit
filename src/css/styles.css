@@ -93,7 +93,7 @@ body {
 /* main content */
 #main {
   display:grid;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: auto;
   grid-template-columns: 25% 75%;
   margin: 40px 0;
 }
