@@ -1,4 +1,3 @@
-let challengeBoardTitle = document.querySelector('.challenge-board-title');
 let displayFriendsResultsHead = document.querySelector('.display-friends-results > thead');
 let displayFriendsResultsBody = document.querySelector('.display-friends-results > tbody');
 let userProfileSection = document.querySelector('.user-profile');
@@ -87,7 +86,6 @@ const getUserWeeklySleepQuality = () => {
   sleepQualityData.forEach((user, index) => {
     user.hoursSlept = sleepHoursSleptData[index].hoursSlept;
   });
-  challengeBoardTitle.innerText = 'Weekly Sleep Stats';
   displaySleepToTable(sleepQualityData);
 }
 
@@ -311,12 +309,15 @@ const displayHydrationGraph = (hydrationStats) => {
   hydrationGraph.style.display = 'block'
   return myChart;
 }
-
+addUserNametoDom = () => {
+document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
+}
 userHotLinks.addEventListener('click', changeUserDataDisplayHandler);
 
 window.onload = () => {
   getCurrentUser(userData);
   getUserWaterDrankForTheWeek()
   createFriendsSection()
-  document.querySelector('.user-name').innerHTML = `<span class="user-name-large">Welcome back ${currentUser.getUserName()}</span>`
+  getUserWeeklyActivity()
+  addUserNametoDom()
 };
