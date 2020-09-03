@@ -35,13 +35,13 @@ describe('Sleep', () => {
   it('Should show a user their sleep hours each day over 7 days', () => {
     expect(sleep.getUserWeeklySleepStats(1, '2019/06/23', 'hoursSlept')).to.deep.equal(
       [
-        { date: '2019/06/29', hoursSlept: 5.3 },
-        { date: '2019/06/28', hoursSlept: 7.6 },
-        { date: '2019/06/27', hoursSlept: 9.4 },
-        { date: '2019/06/26', hoursSlept: 7.7 },
-        { date: '2019/06/25', hoursSlept: 5.1 },
-        { date: '2019/06/24', hoursSlept: 8 },
-        { date: '2019/06/23', hoursSlept: 7.8 }
+        { date: '2019/06/23', hoursSlept: 7.8 },
+        { date: '2019/06/22', hoursSlept: 7 },
+        { date: '2019/06/21', hoursSlept: 7.8 },
+        { date: '2019/06/20', hoursSlept: 9.3 },
+        { date: '2019/06/19', hoursSlept: 10.7 },
+        { date: '2019/06/18', hoursSlept: 10.4 },
+        { date: '2019/06/17', hoursSlept: 8 }
       ]
     );
   });
@@ -52,13 +52,13 @@ describe('Sleep', () => {
   it('Should show a user their sleep quality each day over 7 days', () => {
     expect(sleep.getUserWeeklySleepStats(1, '2019/06/23', 'sleepQuality')).to.deep.equal(
       [
-        { date: '2019/06/29', sleepQuality: 1.2 },
-        { date: '2019/06/28', sleepQuality: 4.7 },
-        { date: '2019/06/27', sleepQuality: 4.6 },
-        { date: '2019/06/26', sleepQuality: 2.4 },
-        { date: '2019/06/25', sleepQuality: 3.7 },
-        { date: '2019/06/24', sleepQuality: 1.3 },
-        { date: '2019/06/23', sleepQuality: 1.5 }
+        { date: '2019/06/23', sleepQuality: 1.5 },
+        { date: '2019/06/22', sleepQuality: 3 },
+        { date: '2019/06/21', sleepQuality: 4.2 },
+        { date: '2019/06/20', sleepQuality: 1.2 },
+        { date: '2019/06/19', sleepQuality: 1.2 },
+        { date: '2019/06/18', sleepQuality: 3.1 },
+        { date: '2019/06/17', sleepQuality: 2.6 }
       ]
     );
   });
